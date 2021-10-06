@@ -44,7 +44,7 @@ a {
 }
 
 header {
-    background-color: lightsalmon;
+    background-color: salmon;
     padding: 20px;
 }
 
@@ -84,7 +84,7 @@ footer {
 }
 
 .categories:hover > p{
-    color: lightsalmon;
+    color: salmon;
     text-decoration: underline;
 }
 
@@ -98,7 +98,7 @@ footer {
 }
 
 .salmon {
-    color: lightsalmon;
+    color: salmon;
 }
 
 .wrap {
@@ -119,7 +119,7 @@ footer {
 }
 
 .border, .border1 {
-    width: 80%;
+    width: 100%;
     border: 1px solid #c2c2c2;
     background-color: #c2c2c2;
     padding: 10px;
@@ -132,8 +132,17 @@ footer {
 }
 
 .border1:hover {
-    background-color: lightsalmon;
+    background-color: salmon;
     color: white;
+}
+
+.gray {
+    color: #898a8a;
+}
+
+h1 {
+    font-size: 35px;
+    margin-bottom: 15px;
 }
 
 .width20 {
@@ -142,4 +151,73 @@ footer {
 
 .width60 {
     width: 60%;
+}
+
+.text {
+    padding: 20px;
+}
+
+.lineHorizontal {
+    border-bottom: 1px solid #c2c2c2;
+    width: 40%;
+    margin: 50px auto;
+}
+
+.comments {
+    margin: 20px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.pseudo, .comment {
+    padding: 10px;
+}
+
+.comment {
+    margin-left: 30px;
+}
+
+.button {
+    background-color: salmon;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: #f86352;
+    box-shadow: 5px 5px 10px gray;
+}
+
+.buttonAbsolute1 {
+    position: absolute;
+    right: 12%;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.auto {
+    margin: auto;
+}
+
+label {
+    font-size: 20px;
+    margin: 10px;
+}
+
+input {
+    font-size: 20px;
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.height {
+    height: 50px;
 }

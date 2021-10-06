@@ -12,9 +12,9 @@
 <div id="wrap">
     <header>
         <div id="menu" class="flexCenter flexRow">
-            <a href="index.php">Accueil</a>
-            <a href="#">Connexion</a>
-            <a href="#">Inscription</a>
+            <a href="../index.php">Accueil</a>
+            <a href="connectionView.php">Connexion</a>
+            <a href="registrationView.php">Inscription</a>
             <a href="#">Compte</a>
         </div>
     </header>
@@ -24,6 +24,10 @@
         <h1 class="center">Cuisines</h1>
         <div class="flexCenter">
             <img class="imageCategorie" src="https://images.unsplash.com/photo-1617196034564-65baf56380ab?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y3VzaW5lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+        </div>
+
+        <div class="height">
+            <a href="#" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
         </div>
 
         <div id="containerSubjects" class="flexCenter flexRow wrap">
@@ -38,7 +42,7 @@
                     <p>Dates</p>
                 </div>
             </div>
-            <a href="#" class="border1 flexRow">
+            <a href="subjectView.php" class="border1 flexRow">
                 <div class="width20 flexCenter">
                     <p>Tartiflette</p>
                 </div>

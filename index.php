@@ -13,8 +13,8 @@
     <header>
         <div id="menu" class="flexCenter flexRow">
             <a href="index.php">Accueil</a>
-            <a href="#">Connexion</a>
-            <a href="#">Inscription</a>
+            <a href="View/connectionView.php">Connexion</a>
+            <a href="View/registrationView.php">Inscription</a>
             <a href="#">Compte</a>
         </div>
     </header>
@@ -23,7 +23,7 @@
     <main>
         <h1 class="center">Bienvenue sur le forum <span class="salmon">Salmon </span>!</h1>
         <div id="containerCategories" class="flexCenter flexRow wrap">
-            <a href="subjectsView.php" class="flexColumn flexCenter categories">
+            <a href="View/subjectsView.php" class="flexColumn flexCenter categories">
                 <img class="imageHome" src="https://images.unsplash.com/photo-1617196034564-65baf56380ab?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y3VzaW5lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
                 <p>Cuisines</p>
             </a>
