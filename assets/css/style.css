@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+}
+
+#wrap {
+    min-height: 100%;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    background-color: lightsalmon;
+    padding: 20px;
+}
+
+#menu > a, footer > a {
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+#menu > a:hover, footer > a:hover {
+    text-decoration: underline;
+}
+
+footer > a {
+    font-size: 13px;
+}
+
+.center {
+    text-align: center;
+}
+
+main {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+footer {
+    width: 100%;
+    background-color: #898a8a;
+    height: 150px;
+}
+
+.categories {
+    margin-top: 25px;
+    width: 20%;
+}
+
+.categories:hover > p{
+    color: lightsalmon;
+    text-decoration: underline;
+}
+
+.imageHome {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.imageHome:hover {
+    opacity: 0.7;
+}
+
+.salmon {
+    color: lightsalmon;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+#containerCategories {
+    margin-top: 40px;
+}
+
+#containerCategories > a {
+    margin: 15px;
+}
+
+.imageCategorie {
+    width: 60%;
+    margin: 30px;
+}
+
+.border, .border1 {
+    width: 80%;
+    border: 1px solid #c2c2c2;
+    background-color: #c2c2c2;
+    padding: 10px;
+    color: white;
+}
+
+.border1 {
+    color: black;
+    background-color: white;
+}
+
+.border1:hover {
+    background-color: lightsalmon;
+    color: white;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.width60 {
+    width: 60%;
+}
