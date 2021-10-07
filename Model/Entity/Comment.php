@@ -2,6 +2,8 @@
 
 namespace Forum\Entity;
 
+use Forum\User\UserManager;
+
 class Comment {
 
     private ?int $id;
@@ -17,7 +19,7 @@ class Comment {
      * @param Subject|null $subject_fk
      * @param User|null $user_fk
      */
-    public function __construct(?int $id = null, ?string $date = null, ?string $comment, ?Subject $subject_fk = null,
+    public function __construct(?int $id = null, ?string $date = null, ?string $comment = null, ?Subject $subject_fk = null,
                                 ?User $user_fk = null) {
         $this->id = $id;
         $this->date = $date;
@@ -36,8 +38,9 @@ class Comment {
     /**
      * @param int|null $id
      */
-    public function setId(?int $id): void {
+    public function setId(?int $id): ?int {
         $this->id = $id;
+        return $id;
     }
 
     /**
@@ -50,8 +53,9 @@ class Comment {
     /**
      * @param string|null $date
      */
-    public function setDate(?string $date): void {
+    public function setDate(?string $date): ?string {
         $this->date = $date;
+        return $date;
     }
 
     /**
@@ -64,8 +68,9 @@ class Comment {
     /**
      * @param string|null $comment
      */
-    public function setComment(?string $comment): void {
+    public function setComment(?string $comment): ?string {
         $this->comment = $comment;
+        return $comment;
     }
 
     /**
@@ -78,8 +83,9 @@ class Comment {
     /**
      * @param Subject|null $subject_fk
      */
-    public function setSubjectFk(?Subject $subject_fk): void {
+    public function setSubjectFk(?Subject $subject_fk): ?Subject {
         $this->subject_fk = $subject_fk;
+        return $subject_fk;
     }
 
     /**
@@ -92,7 +98,8 @@ class Comment {
     /**
      * @param User|null $user_fk
      */
-    public function setUserFk(?User $user_fk): void {
+    public function setUserFk(?User $user_fk): ?User {
         $this->user_fk = $user_fk;
+        return $user_fk;
     }
 }

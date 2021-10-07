@@ -36,8 +36,9 @@ class Categorie {
     /**
      * @param int|null $id
      */
-    public function setId(?int $id): void {
+    public function setId(?int $id): ?int {
         $this->id = $id;
+        return $id;
     }
 
     /**
@@ -50,8 +51,9 @@ class Categorie {
     /**
      * @param string|null $title
      */
-    public function setTitle(?string $title): void {
+    public function setTitle(?string $title): ?string {
         $this->title = $title;
+        return $title;
     }
 
     /**
@@ -64,8 +66,9 @@ class Categorie {
     /**
      * @param string|null $description
      */
-    public function setDescription(?string $description): void {
+    public function setDescription(?string $description): ?string {
         $this->description = $description;
+        return $description;
     }
 
     /**
@@ -78,8 +81,9 @@ class Categorie {
     /**
      * @param string|null $picture
      */
-    public function setPicture(?string $picture): void {
+    public function setPicture(?string $picture): ?string {
         $this->picture = $picture;
+        return $picture;
     }
 
     /**
@@ -92,7 +96,8 @@ class Categorie {
     /**
      * @param User|null $user_fk
      */
-    public function setUserFk(?User $user_fk): void {
+    public function setUserFk(?User $user_fk): ?User {
         $this->user_fk = $user_fk;
+        return $user_fk;
     }
 }

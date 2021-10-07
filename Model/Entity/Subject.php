@@ -45,8 +45,9 @@ class Subject {
     /**
      * @param int|null $id
      */
-    public function setId(?int $id): void {
+    public function setId(?int $id): ?int {
         $this->id = $id;
+        return $id;
     }
 
     /**
@@ -59,8 +60,9 @@ class Subject {
     /**
      * @param string|null $title
      */
-    public function setTitle(?string $title): void {
+    public function setTitle(?string $title): ?string {
         $this->title = $title;
+        return $title;
     }
 
     /**
@@ -73,8 +75,9 @@ class Subject {
     /**
      * @param string|null $description
      */
-    public function setDescription(?string $description): void {
+    public function setDescription(?string $description): ?string {
         $this->description = $description;
+        return $description;
     }
 
     /**
@@ -87,8 +90,9 @@ class Subject {
     /**
      * @param string|null $date
      */
-    public function setDate(?string $date): void {
+    public function setDate(?string $date): ?string {
         $this->date = $date;
+        return $date;
     }
 
     /**
@@ -101,8 +105,9 @@ class Subject {
     /**
      * @param string|null $text
      */
-    public function setText(?string $text): void {
+    public function setText(?string $text): ?string {
         $this->text = $text;
+        return $text;
     }
 
     /**
@@ -115,8 +120,9 @@ class Subject {
     /**
      * @param string|null $picture
      */
-    public function setPicture(?string $picture): void {
+    public function setPicture(?string $picture): ?string {
         $this->picture = $picture;
+        return $picture;
     }
 
     /**
@@ -129,8 +135,9 @@ class Subject {
     /**
      * @param Categorie|null $categorie_fk
      */
-    public function setCategorieFk(?Categorie $categorie_fk): void {
+    public function setCategorieFk(?Categorie $categorie_fk): ?Categorie {
         $this->categorie_fk = $categorie_fk;
+        return $categorie_fk;
     }
 
     /**
@@ -143,7 +150,8 @@ class Subject {
     /**
      * @param User|null $user_fk
      */
-    public function setUserFk(?User $user_fk): void {
+    public function setUserFk(?User $user_fk): ?User {
         $this->user_fk = $user_fk;
+        return $user_fk;
     }
 }

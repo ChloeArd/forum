@@ -38,6 +38,7 @@ class User {
      */
     public function setId(?int $id): ?int {
         $this->id = $id;
+        return $id;
     }
 
     /**
@@ -52,6 +53,7 @@ class User {
      */
     public function setPseudo(?string $pseudo): ?string {
         $this->pseudo = $pseudo;
+        return $pseudo;
     }
 
     /**
@@ -66,6 +68,7 @@ class User {
      */
     public function setEmail(?string $email): ?string {
         $this->email = $email;
+        return $email;
     }
 
     /**
@@ -80,6 +83,7 @@ class User {
      */
     public function setPassword(?string $password): ?string {
         $this->password = $password;
+        return $password;
     }
 
     /**
@@ -94,5 +98,6 @@ class User {
      */
     public function setRoleFk(?Role $role_fk): ?Role {
         $this->role_fk = $role_fk;
+        return $role_fk;
     }
 }

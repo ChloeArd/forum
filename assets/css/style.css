@@ -209,6 +209,10 @@ h1 {
     margin-top: 40px;
 }
 
+.size12 {
+    font-size: 12px;
+}
+
 .button3 {
     background-color: white;
     width: initial;
