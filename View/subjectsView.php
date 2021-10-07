@@ -26,6 +26,9 @@
             <a href="Update/updateCategorieView.php" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
         </div>
         <div class="height">
+            <a href="#" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
+        </div>
+        <div class="height">
             <a href="Delete/deleteCategorieView.php" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
         </div>
         <div class="flexCenter">
