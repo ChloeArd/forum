@@ -31,7 +31,7 @@ if ($_GET['id'] === $_SESSION['id']) { ?>
         </header>
 
         <main>
-            <h1 class="center">Bienvenue <span class="salmon"><?=$_SESSION['pseudo']?></span> !</h1>
+            <h1 class="center">Mes sujets</h1>
             <div id="containerCategories" class=" flexRow wrap">
                 <div class="width20">
                     <a href="accountView.php?id=<?=$_SESSION['id']?>">
@@ -47,12 +47,12 @@ if ($_GET['id'] === $_SESSION['id']) { ?>
                     </div>
                 </div>
                 <div class="width80 flexCenter">
-                    <div class="width80 border flexCenter flexColumn">
-                        <p class="info1 width_100">Pseudo : <span><?=$_SESSION['pseudo']?></span></p>
-                        <p class="info1 width_100">Email : <span><?=$_SESSION['email']?></span></p>
-                        <a href="Update/updateAccountView.php?id=<?=$_SESSION['id']?>" class="flexCenter button width40 margTop15">Modifier <i class="far fa-edit margL"></i></a>
-                        <a href="Update/updatePasswordView.php?id=<?=$_SESSION['id']?>" class="flexCenter button center width40 margTop15">Changer mon mot de passe<i class="far fa-edit margL"></i></a>
-                        <a href="Delete/deleteAccountView.php?id=<?=$_SESSION['id']?>" class="flexCenter button center width40 margTop15">Supprimer mon compte</a>
+                    <div class="width80 border flexCenter flexRow wrap">
+                        <a href="subjectsView.php" class="flexColumn flexCenter categories marg20 white">
+                            <img class="imageHome" src="https://cache.marieclaire.fr/data/photo/w1000_c17/cuisine/4r/tartiflette-express-au-reblochon-1.webp">
+                            <p class="size20">Tartiflette</p>
+                            <p class="margTop15">Catégorie : Cuisines</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -67,5 +67,5 @@ if ($_GET['id'] === $_SESSION['id']) { ?>
 
     </body>
     </html>
-<?php
+    <?php
 }

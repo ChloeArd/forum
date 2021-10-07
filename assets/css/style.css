@@ -131,8 +131,16 @@ footer {
     background-color: white;
 }
 
-.border1:hover {
+.border1:hover, .border1:hover > a, .border1:hover > form > input {
     background-color: salmon;
+    color: white;
+}
+
+.marg20 {
+    margin: 20px;
+}
+
+.white {
     color: white;
 }
 
@@ -211,6 +219,16 @@ h1 {
 
 .margL {
     margin-left: 10px;
+}
+
+.disconnection > input {
+    font-size: 16px;
+    background-color: transparent;
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    text-align: initial;
+    border-radius: 0;
 }
 
 .imagePlus {
