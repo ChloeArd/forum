@@ -22,12 +22,18 @@
 
     <main>
         <h1 class="center">Cuisines</h1>
+        <div class="height">
+            <a href="Update/updateCategorieView.php" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
+        </div>
+        <div class="height">
+            <a href="Delete/deleteCategorieView.php" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
+        </div>
         <div class="flexCenter">
             <img class="imageCategorie" src="https://images.unsplash.com/photo-1617196034564-65baf56380ab?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y3VzaW5lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
         </div>
 
         <div class="height">
-            <a href="#" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
+            <a href="Create/createSubjectView.php" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
         </div>
 
         <div id="containerSubjects" class="flexCenter flexRow wrap">

@@ -22,6 +22,12 @@
     <main>
         <h1 class="center">Tartiflette</h1>
         <p class="center gray">Par pseudo</p>
+        <div class="height">
+            <a href="Update/updateSubjectView.php" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
+        </div>
+        <div class="height">
+            <a href="Delete/deleteSubjectView.php" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
+        </div>
         <div class="flexCenter">
             <img class="imageCategorie" src="https://cache.marieclaire.fr/data/photo/w1000_c17/cuisine/4r/tartiflette-express-au-reblochon-1.webp">
         </div>
@@ -38,13 +44,15 @@
         <div class="lineHorizontal"></div>
         <div class="flexRow flexCenter">
             <h2 class="gray">Commentaires</h2>
-            <a href="#" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
+            <a href="Create/createCommentView.php" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
         </div>
 
 
         <div class="comments flexColumn">
-            <div class="pseudo gray">
+            <div class="pseudo gray flexRow align">
                 <p>Pseudo - 00/00/0000</p>
+                <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
+                <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
             </div>
             <div class="comment">
                 <p>Commentaires blablabla</p>
@@ -52,8 +60,10 @@
         </div>
 
         <div class="comments flexColumn">
-            <div class="pseudo gray">
+            <div class="pseudo gray flexRow align">
                 <p>Pseudo - 00/00/0000</p>
+                <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
+                <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
             </div>
             <div class="comment">
                 <p>Commentaires blablabla</p>
