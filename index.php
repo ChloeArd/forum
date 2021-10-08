@@ -21,6 +21,7 @@ require_once './Controller/HomeController.php';
 require_once './Controller/CategorieController.php';
 require_once './Controller/SubjectController.php';
 
+
 use Controller\CategorieController;
 use Controller\HomeController;
 use Controller\SubjectController;
@@ -45,6 +46,28 @@ if (isset($_GET['controller'])) {
             break;
         case 'subjects' :
             $controllerSubjects = new SubjectController();
+            if (isset($_GET['action'])) {
+                switch ($_GET['action']) {
+                    case 'view' :
+                        $controllerSubjects->subjects($_GET['id']);
+                        break;
+                    case 'viewOnly' :
+                        $controllerSubjects->subject($_GET['id'], $_GET['id2']);
+                        break;
+                    case 'new' :
+                        $controllerSubjects->add($_POST);
+                        break;
+                    case 'update' :
+                        $controllerSubjects->update($_POST);
+                        break;
+                    case 'delete' :
+                        $controllerSubjects->delete($_POST);
+                        break;
+                }
+            }
+            break;
+        case 'comments' :
+            $commentSubjects = new CommentController();
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'view' :
