@@ -26,7 +26,7 @@
     <div class="lineHorizontal"></div>
     <div class="flexRow flexCenter">
         <h2 class="gray">Commentaires</h2>
-        <a href="Create/createCommentView.php" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
+        <a href="../index.php?controller=comments&action=new" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
     </div>
 
     <?php

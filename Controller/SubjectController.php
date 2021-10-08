@@ -35,8 +35,7 @@ class SubjectController {
      * add a subject
      * @param $subject
      */
-    public function add($subject)
-    {
+    public function add($subject) {
         if (isset($_SESSION["id"])) {
             if (isset($subject['title'], $subject['description'], $subject['date'], $subject['text'], $subject['picture'], $subject['categorie_fk'], $subject['user_fk'])) {
                 $subjectManager = new SubjectManager();
@@ -75,8 +74,7 @@ class SubjectController {
      * add a subject
      * @param $subject
      */
-    public function update($subject)
-    {
+    public function update($subject) {
         if (isset($_SESSION["id"])) {
             if (isset($subject['id'], $subject['title'], $subject['description'], $subject['date'], $subject['text'], $subject['picture'], $subject['categorie_fk'], $subject['user_fk'])) {
                 $subjectManager = new SubjectManager();

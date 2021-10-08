@@ -23,6 +23,7 @@ require_once './Controller/SubjectController.php';
 require_once './Controller/CommentController.php';
 
 use Controller\CategorieController;
+use Controller\CommentController;
 use Controller\HomeController;
 use Controller\SubjectController;
 
@@ -67,23 +68,17 @@ if (isset($_GET['controller'])) {
             }
             break;
         case 'comments' :
-            $commentSubjects = new CommentController();
+            $controllerComments = new CommentController();
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
-                    case 'view' :
-                        $controllerSubjects->subjects($_GET['id']);
-                        break;
-                    case 'viewOnly' :
-                        $controllerSubjects->subject($_GET['id'], $_GET['id2']);
-                        break;
                     case 'new' :
-                        $controllerSubjects->add($_POST);
+                        $controllerComments->add($_POST);
                         break;
                     case 'update' :
-                        $controllerSubjects->update($_POST);
+                        //$controllerSubjects->update($_POST);
                         break;
                     case 'delete' :
-                        $controllerSubjects->delete($_POST);
+                        //$controllerSubjects->delete($_POST);
                         break;
                 }
             }
