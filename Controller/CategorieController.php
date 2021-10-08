@@ -54,10 +54,11 @@ class CategorieController
     public function update($categorie) {
         if (isset($_SESSION["id"])) {
             if ($_SESSION['role_fk'] === "1") {
-                if (isset($categorie['title'], $categorie['description'], $categorie['picture'], $categorie['user_fk'])) {
+                if (isset($categorie['id'], $categorie['title'], $categorie['description'], $categorie['picture'], $categorie['user_fk'])) {
                     $userManager = new UserManager();
                     $categorieManager = new CategorieManager();
 
+                    $id = intval($categorie['id']);
                     $title = htmlentities(trim(ucfirst($categorie['title'])));
                     $description = htmlentities(trim(ucfirst($categorie['description'])));
                     $picture = trim($categorie['picture']);
@@ -69,7 +70,7 @@ class CategorieController
                     if (filter_var($picture, FILTER_VALIDATE_URL)) {
                         $user_fk = $userManager->getUser($user_fk);
                         if ($user_fk->getId()) {
-                            $categorie = new Categorie(null, $title, $description, $picture, $user_fk);
+                            $categorie = new Categorie($id, $title, $description, $picture, $user_fk);
                             $categorieManager->update($categorie);
                             header("Location: ../index.php?success=2");
                         }
@@ -95,7 +96,7 @@ class CategorieController
                     $categorieManager->delete($id);
                     header("Location: ../index.php?&success=3");
                 }
-                $this->return('delete/deleteCategorieView', "Anim'Nord : Supprimer un commentaire");
+                $this->return('delete/deleteCategorieView', "Forum : Supprimer une catégorie");
             }
         }
     }

@@ -57,10 +57,10 @@ if (isset($_GET['controller'])) {
                         $controllerSubjects->add($_POST);
                         break;
                     case 'update' :
-                        //$controllerCategories->update($_POST);
+                        $controllerSubjects->update($_POST);
                         break;
                     case 'delete' :
-                        //$controllerCategories->delete($_POST);
+                        $controllerSubjects->delete($_POST);
                         break;
                 }
             }

@@ -46,7 +46,7 @@ class SubjectManager {
     }
 
     /**
-     * Allows you to display a subject based on its ID.
+     * Allows you to display a subject based on its ID and categorie
      * @param int $id
      * @param int $categorie_fk
      * @return array
@@ -56,6 +56,27 @@ class SubjectManager {
         $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE id = :id AND categorie_fk = :categorie_fk");
         $request->bindParam(":id", $id);
         $request->bindParam(":categorie_fk", $categorie_fk);
+        if($request->execute()) {
+            foreach ($request->fetchAll() as $info) {
+                $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
+                $user = UserManager::getManager()->getUser($info['user_fk']);
+                if($user->getId()) {
+                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user);
+                }
+            }
+        }
+        return $subject;
+    }
+
+    /**
+     * Allows you to display a subject based on its ID.
+     * @param int $id
+     * @return array
+     */
+    public function getSubjectId2(int $id): array {
+        $subject = [];
+        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE id = :id");
+        $request->bindParam(":id", $id);
         if($request->execute()) {
             foreach ($request->fetchAll() as $info) {
                 $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
@@ -132,15 +153,15 @@ class SubjectManager {
 
     /**
      * Delete a subject with comments
-     * @param Subject $subject
+     * @param int $subject
      * @return bool
      */
-    public function delete (Subject $subject): bool {
+    public function delete (int $id): bool {
         $request = DB::getInstance()->prepare("DELETE FROM comment WHERE subject_fk = :subject_fk");
-        $request->bindValue(":subject_fk", $subject->getId());
+        $request->bindValue(":subject_fk", $id);
         $request->execute();
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE id = :id");
-        $request->bindValue(":id", $subject->getId());
+        $request->bindValue(":id", $id);
         return $request->execute();
     }
 }

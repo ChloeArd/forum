@@ -271,6 +271,10 @@ h1 {
 .buttonPos3 {
     right: 15%;
 }
+.buttonPos4 {
+    right: 13%;
+}
+
 
 .button3:hover {
     box-shadow: 3px 3px 10px gray;

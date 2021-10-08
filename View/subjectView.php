@@ -1,24 +1,27 @@
 <main>
-    <h1 class="center">Tartiflette</h1>
-    <p class="center gray">Par pseudo</p>
-    <div class="height">
-        <a href="Update/updateSubjectView.php" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
-    </div>
-    <div class="height">
-        <a href="Delete/deleteSubjectView.php" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
-    </div>
-    <div class="flexCenter">
-        <img class="imageCategorie" src="https://cache.marieclaire.fr/data/photo/w1000_c17/cuisine/4r/tartiflette-express-au-reblochon-1.webp">
-    </div>
-    <h2 class="center">irifrefoifn refrnreif</h2>
-    <p class="text">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-        Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme
-        assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait
-        que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-        soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des
-        passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte,
-        comme Aldus PageMaker.
-    </p>
+    <?php
+    if (isset($var['subject'])) {
+        foreach ($var['subject'] as $subject) { ?>
+            <h1 class="center"><?=$subject->getTitle()?></h1>
+            <p class="center gray">Par <?=$subject->getUserFk()->getPseudo()?></p>
+            <div class="height">
+                <a href="../index.php?controller=subjects&action=update&id=<?=$subject->getId()?>&id2=<?=$subject->getCategorieFk()->getId()?>" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
+            </div>
+            <div class="height">
+                <a href="#" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
+            </div>
+            <div class="height">
+                <a href="../index.php?controller=subjects&action=delete&id=<?=$subject->getId()?>" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
+            </div>
+            <div class="flexCenter">
+                <img class="imageCategorie" src="<?=$subject->getPicture()?>">
+            </div>
+            <h2 class="center"><?=$subject->getDescription()?></h2>
+            <p class="text"><?=$subject->getText()?></p>
+        <?php
+        }
+    }
+    ?>
 
     <div class="lineHorizontal"></div>
     <div class="flexRow flexCenter">
@@ -31,6 +34,7 @@
             <p>Pseudo - 00/00/0000</p>
             <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
             <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
         </div>
         <div class="comment">
             <p>Commentaires blablabla</p>
@@ -42,6 +46,7 @@
             <p>Pseudo - 00/00/0000</p>
             <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
             <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
+            <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
         </div>
         <div class="comment">
             <p>Commentaires blablabla</p>
