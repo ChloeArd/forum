@@ -12,18 +12,26 @@
 <div id="wrap">
     <header>
         <div id="menu" class="flexCenter flexRow">
-            <a href="#">Accueil</a>
-            <a href="#">Forum</a>
-            <a href="#">Connexion</a>
-            <a href="#">Inscription</a>
-            <a href="#">Compte</a>
+            <a href="../../index.php">Accueil</a>
+            <?php
+            if (isset($_SESSION['id'])) {?>
+                <a href="../../View/accountView.php?id=<?=$_SESSION['id']?>"><i class="fas fa-user-circle margR"></i><?=$_SESSION['pseudo'] ?></a>
+                <?php
+            }
+            else { ?>
+                <a href="../../View/connectionView.php">Connexion</a>
+                <a href="../../View/registrationView.php">Inscription</a>
+            <?php
+            }
+            ?>
         </div>
     </header>
 
     <?= $html ?>
 
-    <footer class="flexCenter flexColumn">
-
+    <footer class="flexCenter">
+        <a href="">Mentions légales</a>
+        <a href="">Contact</a>
     </footer>
 </div>
 <script src="/assets/js/app.js"></script>
