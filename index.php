@@ -19,9 +19,11 @@ require_once './Model/Manager/CommentManager.php';
 
 require_once './Controller/HomeController.php';
 require_once './Controller/CategorieController.php';
+require_once './Controller/SubjectController.php';
 
 use Controller\CategorieController;
 use Controller\HomeController;
+use Controller\SubjectController;
 
 if (isset($_GET['controller'])) {
     switch ($_GET['controller']) {
@@ -31,6 +33,22 @@ if (isset($_GET['controller'])) {
                 switch ($_GET['action']) {
                     case 'new' :
                         $controllerCategories->add($_POST);
+                        break;
+                    case 'update' :
+                        $controllerCategories->update($_POST);
+                        break;
+                    case 'delete' :
+                        $controllerCategories->delete($_POST);
+                        break;
+                }
+            }
+            break;
+        case 'subjects' :
+            $controllerSubjects = new SubjectController();
+            if (isset($_GET['action'])) {
+                switch ($_GET['action']) {
+                    case 'view' :
+                        $controllerSubjects->subjects($_GET['id']);
                         break;
                     case 'update' :
                         //$controllerCategories->update($_POST);

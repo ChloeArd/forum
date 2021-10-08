@@ -73,7 +73,7 @@ class SubjectManager {
      */
     public function getSubjects(int $categorie_fk): array {
         $subject = [];
-        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE categorie_fk = :categorie_fk");
+        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE categorie_fk = :categorie_fk ORDER by id DESC");
         $request->bindParam(":categorie_fk", $categorie_fk);
         if($request->execute()) {
             foreach ($request->fetchAll() as $info) {

@@ -110,10 +110,10 @@ class CategorieManager {
 
     /**
      * Delete a categorie with subject, comments
-     * @param Categorie $categorie
+     * @param int $categorie
      * @return bool
      */
-    public function delete (Categorie $categorie): bool {
+    public function delete (int $categorie): bool {
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE categorie_fk = :categorie_fk");
         $request->bindValue(":categorie_fk", $categorie->getId());
         $request->execute();
