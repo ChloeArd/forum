@@ -3,6 +3,7 @@ namespace Controller;
 
 use Controller\Traits\ReturnViewTrait;
 use Forum\Categorie\CategorieManager;
+use Forum\Comment\CommentManager;
 use Forum\Entity\Subject;
 use Forum\Subject\SubjectManager;
 use Forum\User\UserManager;
@@ -26,7 +27,8 @@ class SubjectController {
      */
     public function subject(int $id, int $categorie_fk) {
         $manager = new SubjectManager();
-        $this->return("subjectView", "Forum : Sujet", ['subject' => $manager->getSubjectId($id, $categorie_fk)]);
+        $manager2 = new CommentManager();
+        $this->return("subjectView", "Forum : Sujet", ['subject' => $manager->getSubjectId($id, $categorie_fk), 'comments' => $manager2->getComments($id)]);
     }
 
     /**

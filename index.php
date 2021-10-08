@@ -20,7 +20,7 @@ require_once './Model/Manager/CommentManager.php';
 require_once './Controller/HomeController.php';
 require_once './Controller/CategorieController.php';
 require_once './Controller/SubjectController.php';
-
+require_once './Controller/CommentController.php';
 
 use Controller\CategorieController;
 use Controller\HomeController;

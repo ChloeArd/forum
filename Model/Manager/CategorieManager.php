@@ -22,6 +22,7 @@ class CategorieManager {
      * @return Categorie
      */
     public function getCategorie($id) {
+        $id = intval($id);
         $request = DB::getInstance()->prepare("SELECT * FROM categorie WHERE id = :id");
         $request->bindParam(":id", $id);
         $request->execute();

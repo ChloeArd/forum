@@ -29,27 +29,22 @@
         <a href="Create/createCommentView.php" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
     </div>
 
-    <div class="comments flexColumn">
-        <div class="pseudo gray flexRow align">
-            <p>Pseudo - 00/00/0000</p>
-            <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
-            <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
-            <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
-        </div>
-        <div class="comment">
-            <p>Commentaires blablabla</p>
-        </div>
-    </div>
-
-    <div class="comments flexColumn">
-        <div class="pseudo gray flexRow align">
-            <p>Pseudo - 00/00/0000</p>
-            <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
-            <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
-            <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
-        </div>
-        <div class="comment">
-            <p>Commentaires blablabla</p>
-        </div>
-    </div>
+    <?php
+    if (isset($var['comments'])) {
+        foreach ($var['comments'] as $comment) { ?>
+            <div class="comments flexColumn">
+                <div class="pseudo gray flexRow align">
+                    <p><?=$comment->getUserFk()->getPseudo()?> / <?=$comment->getDate()?></p>
+                    <a href="Update/updateCommentView.php" class="button3"><i class="fas fa-edit"></i></a>
+                    <a href="Delete/deleteCommentView.php" class="button3 buttonPos3"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
+                </div>
+                <div class="comment">
+                    <p><?=$comment->getComment()?></p>
+                </div>
+            </div>
+        <?php
+        }
+    }
+    ?>
 </main>
