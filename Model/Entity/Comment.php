@@ -9,6 +9,7 @@ class Comment {
     private ?int $id;
     private ?string $date;
     private ?string $comment;
+    private ?Categorie $categorie_fk;
     private ?Subject $subject_fk;
     private ?User $user_fk;
 
@@ -16,14 +17,16 @@ class Comment {
      * @param int|null $id
      * @param string|null $date
      * @param string|null $comment
+     * @param Categorie|null $categorie_fk
      * @param Subject|null $subject_fk
      * @param User|null $user_fk
      */
-    public function __construct(?int $id = null, ?string $date = null, ?string $comment = null, ?Subject $subject_fk = null,
+    public function __construct(?int $id = null, ?string $date = null, ?string $comment = null, ?Categorie $categorie_fk = null, ?Subject $subject_fk = null,
                                 ?User $user_fk = null) {
         $this->id = $id;
         $this->date = $date;
         $this->comment = $comment;
+        $this->categorie_fk = $categorie_fk;
         $this->subject_fk = $subject_fk;
         $this->user_fk = $user_fk;
     }
@@ -71,6 +74,21 @@ class Comment {
     public function setComment(?string $comment): ?string {
         $this->comment = $comment;
         return $comment;
+    }
+
+    /**
+     * @return Categorie|null
+     */
+    public function getCategorieFk(): ?Categorie {
+        return $this->categorie_fk;
+    }
+
+    /**
+     * @param Categorie|null $categorie_fk
+     */
+    public function setCategorieFk(?Categorie $categorie_fk): ?Categorie {
+        $this->categorie_fk = $categorie_fk;
+        return $categorie_fk;
     }
 
     /**

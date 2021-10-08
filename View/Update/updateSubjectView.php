@@ -23,14 +23,14 @@
         <h1 class="center">Modifier le sujet : <span class="salmon">Titre</span></h1>
         <form method="post" action="#" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
             <label for="title">Titre</label>
-            <input type="text" id="title" name="title">
-            <label for="picture">Sélectionner une nouvelle image à télécharger (PNG, JPEG, JPG)</label>
-            <input type="file" name="picture" id="picture" accept="image/png, image/jpeg, image/jpg">
-            <span>(Max: 6Mo)</span>
+            <input type="text" id="title" name="title" maxlength="40" required>
+            <label for="picture">Modifier le lien d'une image</label>
+            <input type="text" name="picture" id="picture" value="" required>
+            <img class="imageUpdate" src="" alt="">
             <label for="description">Description</label>
-            <textarea name="description" id="description"></textarea>
+            <textarea name="description" id="description" required></textarea>
             <label for="content">Contenu</label>
-            <textarea name="content" id="content"></textarea>
+            <textarea name="content" id="content" required></textarea>
             <input type="hidden" value="id" name="id">
             <input type="hidden" value="date" name="date">
             <input type="hidden" value="categorie_fk" name="categorie_fk">

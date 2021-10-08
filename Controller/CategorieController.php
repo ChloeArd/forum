@@ -64,7 +64,7 @@ class CategorieController
                     $user_fk = $categorie['user_fk'];
 
                     if (strlen($title) >= 20) {
-                        header("Location: ../index.php?controller=categories&action=new&error=0");
+                        header("Location: ../index.php?controller=categories&action=update&error=0");
                     }
                     if (filter_var($picture, FILTER_VALIDATE_URL)) {
                         $user_fk = $userManager->getUser($user_fk);
@@ -74,7 +74,7 @@ class CategorieController
                             header("Location: ../index.php?success=2");
                         }
                     } else {
-                        header("Location: ../index.php?controller=categories&action=new&error=1");
+                        header("Location: ../index.php?controller=categories&action=update&error=1");
                     }
                 }
             }

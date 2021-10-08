@@ -110,18 +110,18 @@ class CategorieManager {
 
     /**
      * Delete a categorie with subject, comments
-     * @param int $categorie
+     * @param int $id
      * @return bool
      */
-    public function delete (int $categorie): bool {
+    public function delete (int $id): bool {
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE categorie_fk = :categorie_fk");
-        $request->bindValue(":categorie_fk", $categorie->getId());
+        $request->bindValue(":categorie_fk", $id);
         $request->execute();
-        $request = DB::getInstance()->prepare("DELETE FROM comment WHERE subject_fk = :subject_fk");
-        $request->bindValue(":subject_fk", $categorie->getId());
+        $request = DB::getInstance()->prepare("DELETE FROM comment WHERE categorie_fk = :categorie_fk");
+        $request->bindValue(":categorie_fk", $id);
         $request->execute();
         $request = DB::getInstance()->prepare("DELETE FROM categorie WHERE id = :id");
-        $request->bindValue(":id", $categorie->getId());
+        $request->bindValue(":id", $id);
         return $request->execute();
     }
 }

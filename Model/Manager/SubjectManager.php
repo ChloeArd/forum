@@ -48,12 +48,14 @@ class SubjectManager {
     /**
      * Allows you to display a subject based on its ID.
      * @param int $id
+     * @param int $categorie_fk
      * @return array
      */
-    public function getSubjectId(int $id): array {
+    public function getSubjectId(int $id, int $categorie_fk): array {
         $subject = [];
-        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE id = :id");
+        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE id = :id AND categorie_fk = :categorie_fk");
         $request->bindParam(":id", $id);
+        $request->bindParam(":categorie_fk", $categorie_fk);
         if($request->execute()) {
             foreach ($request->fetchAll() as $info) {
                 $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
@@ -103,7 +105,7 @@ class SubjectManager {
         $request->bindValue(':date', $subject->getDate());
         $request->bindValue(':text', $subject->getText());
         $request->bindValue(':picture', $subject->getPicture());
-        $request->bindValue(':categorie_fk', $subject->getCategorieFk());
+        $request->bindValue(':categorie_fk', $subject->getCategorieFk()->getId());
         $request->bindValue(':user_fk', $subject->getUserFk()->getId());
 
         return $request->execute() && DB::getInstance()->lastInsertId() != 0;

@@ -50,9 +50,9 @@ if ($_GET['id'] === $_SESSION['id']) { ?>
                     <div class="width80 border flexCenter flexColumn">
                         <form method="post" action="#" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
                             <label for="pseudo">Pseudo</label>
-                            <input type="text" id="pseudo" name="pseudo" value="<?=$_SESSION['pseudo']?>">
+                            <input type="text" id="pseudo" name="pseudo" value="<?=$_SESSION['pseudo']?>" required>
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" value="<?=$_SESSION['email']?>">
+                            <input type="email" id="email" name="email" value="<?=$_SESSION['email']?>" required>
                             <input type="hidden" value="id" name="id">
                             <input type="submit" name="submit" value="Modifier" class="button">
                         </form>

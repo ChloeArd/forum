@@ -50,11 +50,11 @@ if ($_GET['id'] === $_SESSION['id']) { ?>
                     <div class="width80 border flexCenter flexColumn">
                         <form method="post" action="#" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
                             <label for="passNow">Mot de passe actuel</label>
-                            <input type="password" id="passNow" name="passNow">
+                            <input type="password" id="passNow" name="passNow" required>
                             <label for="passNew">Nouveau mot de passe</label>
-                            <input type="password" id="passNew" name="passNew">
+                            <input type="password" id="passNew" name="passNew" required>
                             <label for="passNewR">Répet du nouveau mot de passe</label>
-                            <input type="password" id="passNewR" name="passNewR">
+                            <input type="password" id="passNewR" name="passNewR" required>
                             <input type="hidden" value="id" name="id">
                             <input type="submit" name="submit" value="Confirmer" class="button">
                         </form>

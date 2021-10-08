@@ -40,8 +40,9 @@ class UserManager {
      * @param $id
      * @return User
      */
-    public function getUser($id): User {
+    public function getUser( $id): User {
         $request = DB::getInstance()->prepare("SELECT * FROM user WHERE id = :id");
+        $id = intval($id);
         $request->bindParam(":id", $id);
         $request->execute();
         $info = $request->fetch();

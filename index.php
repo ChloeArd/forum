@@ -50,6 +50,12 @@ if (isset($_GET['controller'])) {
                     case 'view' :
                         $controllerSubjects->subjects($_GET['id']);
                         break;
+                    case 'viewOnly' :
+                        $controllerSubjects->subject($_GET['id'], $_GET['id2']);
+                        break;
+                    case 'new' :
+                        $controllerSubjects->add($_POST);
+                        break;
                     case 'update' :
                         //$controllerCategories->update($_POST);
                         break;
