@@ -6,16 +6,16 @@
                 <?php
                 if (isset($_SESSION['id'])) {
                     if ($_SESSION['role_fk'] === "1") { ?>
-                <div class="height">
-                    <a href="../index.php?controller=categories&action=update&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
-                </div>
-                <div class="height">
-                    <a href="#" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
-                </div>
-                <div class="height">
-                    <a href="../index.php?controller=categories&action=delete&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
-                </div>
-                <?php
+                        <div class="height">
+                            <a href="../index.php?controller=categories&action=update&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <div class="height">
+                            <a href="#" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
+                        </div>
+                        <div class="height">
+                            <a href="../index.php?controller=categories&action=delete&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    <?php
                     }
                 }
                 ?>
@@ -23,10 +23,13 @@
                     <img class="imageCategorie" src="<?=$categorie->getPicture()?>" alt="<?=$categorie->getTitle()?>">
                 </div>
 
-                <div class="height">
-                    <a href="../index.php?controller=subjects&action=new&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
-                </div>
-            <?php
+                <?php
+                if (isset($_SESSION['id'])) {?>
+                    <div class="height">
+                        <a href="../index.php?controller=subjects&action=new&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
+                    </div>
+                    <?php
+                }
             }
         }?>
 

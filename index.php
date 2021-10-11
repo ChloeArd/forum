@@ -75,14 +75,26 @@ if (isset($_GET['controller'])) {
                         $controllerComments->add($_POST);
                         break;
                     case 'update' :
-                        //$controllerSubjects->update($_POST);
+                        $controllerComments->update($_POST);
                         break;
                     case 'delete' :
-                        //$controllerSubjects->delete($_POST);
+                        $controllerComments->delete($_POST);
                         break;
                 }
             }
             break;
+        case 'home' :
+            $controller = new HomeController();
+            if (isset($_GET['page'])) {
+                switch ($_GET['page']) {
+                    case 'connection' :
+                        $controller->connection();
+                        break;
+                    case 'registration' :
+                        $controller->registration();
+                        break;
+                }
+            }
         default:
             break;
     }

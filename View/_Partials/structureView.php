@@ -19,8 +19,8 @@
                 <?php
             }
             else { ?>
-                <a href="../../View/connectionView.php">Connexion</a>
-                <a href="../../View/registrationView.php">Inscription</a>
+                <a href="../../index.php?controller=home&page=connection">Connexion</a>
+                <a href="../../index.php?controller=home&page=registration">Inscription</a>
             <?php
             }
             ?>

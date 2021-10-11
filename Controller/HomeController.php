@@ -18,4 +18,18 @@ class HomeController {
 
         $this->return("homeView", "Forum : Accueil", ['categories' => $categories]);
     }
+
+    /**
+     * display the connection page
+     */
+    public function connection() {
+        $this->return("connectionView", "Forum : Connexion");
+    }
+
+    /**
+     * display the registration page
+     */
+    public function registration() {
+        $this->return("registrationView", "Forum : Inscription");
+    }
 }

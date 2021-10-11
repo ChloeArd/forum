@@ -104,8 +104,8 @@ class CommentManager {
 
         $request->bindValue(':date', $comment->getDate());
         $request->bindValue(':comment', $comment->getComment());
-        $request->bindValue(':categorie_fk', $comment->getCategorieFk());
-        $request->bindValue(':subject_fk', $comment->getSubjectFk());
+        $request->bindValue(':categorie_fk', $comment->getCategorieFk()->getId());
+        $request->bindValue(':subject_fk', $comment->getSubjectFk()->getId());
         $request->bindValue(':user_fk', $comment->getUserFk()->getId());
 
         return $request->execute() && DB::getInstance()->lastInsertId() != 0;
@@ -128,12 +128,12 @@ class CommentManager {
 
     /**
      * Delete a comment
-     * @param Comment $comment
+     * @param int $id
      * @return bool
      */
-    public function delete (Comment $comment): bool {
+    public function delete (int $id): bool {
         $request = DB::getInstance()->prepare("DELETE FROM comment WHERE id = :id");
-        $request->bindValue(":subject_fk", $comment->getId());
+        $request->bindValue(":id", $id);
         return $request->execute();
     }
 }

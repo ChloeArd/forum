@@ -1,43 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Forum : Accueil</title>
-    <script src="https://kit.fontawesome.com/351e9300a0.js" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/style.css">
-</head>
-<body>
+<?php
+$id = $_GET['id'];
+$manager = new \Forum\Comment\CommentManager();
+$comment = $manager->getCommentId($id);
 
-<div id="wrap">
-    <header>
-        <div id="menu" class="flexCenter flexRow">
-            <a href="../../index.php">Accueil</a>
-            <a href="../connectionView.php">Connexion</a>
-            <a href="../registrationView.php">Inscription</a>
-            <a href="#">Compte</a>
-        </div>
-    </header>
-
+foreach ($comment as $com) { ?>
     <main>
         <h1 class="center">Modifier un commentaire</h1>
-        <form method="post" action="#" class="flexColumn flexCenter width80 auto">
+        <form method="post" action="" class="flexColumn flexCenter width80 auto">
             <label for="comment">Commentaire</label>
-            <textarea name="comment" id="comment" required></textarea>
+            <textarea name="comment" id="comment" required><?=$com->getComment()?></textarea>
             <input type="hidden" value="id" name="id">
-            <input type="hidden" value="date" name="date">
-            <input type="hidden" value="subject_fk" name="subject_fk">
-            <input type="hidden" value="user_fk" name="user_fk">
-            <input type="submit" name="submit" value="Ajouter" class="button">
+            <input type="hidden" value="<?=date("Y-m-d")?>" name="date">
+            <input type="hidden" value="<?=$com->getId()?>" name="id">
+            <input type="hidden" value="<?=$com->getCategorieFk()->getId()?>" name="categorie_fk">
+            <input type="hidden" value="<?=$com->getSubjectFk()->getId()?>" name="subject_fk">
+            <input type="hidden" value="<?=$com->getUserFk()->getId()?>" name="user_fk">
+            <input type="submit" name="submit" value="Modifier" class="button">
         </form>
     </main>
-
-    <footer class="flexCenter">
-        <a href="">Mentions légales</a>
-        <a href="">Contact</a>
-    </footer>
-</div>
-<script src="/assets/js/app.js"></script>
-
-</body>
-</html>
+<?php
+}
