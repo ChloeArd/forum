@@ -48,6 +48,17 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
                     $sql->bindValue(':role_fk', 2);
                     $sql->execute();
 
+                    $to = $email;
+                    $subject = "Vérification de l'adresse mail.";
+                    $message = "
+                            <html lang='fr'>
+                                <h1>Bienvenue $pseudo, sur le Forum Salmon !</h1>
+                                <br><br>
+                                <p>Pour accéder à ton compte, clique sur le <a href='../../index.php'>lien</a> pour vérifier ton adresse mail.</p>
+                            </html>
+                            ";
+
+
                     header("Location: ../../index.php?controller=home&page=connection&success=0");
                 } else {
                     header("Location: ../../index.php?controller=home&page=registration&error=2");
