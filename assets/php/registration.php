@@ -6,7 +6,7 @@ require "../../Model/DB.php";
 if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwordR'])) {
     $bdd = DB::getInstance();
 
-    $pseudo = htmlentities(trim(ucfirst($_POST["pseudo"])));
+    $pseudo = htmlentities(trim($_POST["pseudo"]));
     $email = htmlentities(trim($_POST["email"]));
     $password = htmlentities(trim($_POST["password"]));
     $passwordR = htmlentities(trim($_POST['passwordR']));

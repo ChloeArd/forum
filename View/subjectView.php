@@ -50,8 +50,6 @@
     }
     ?>
 
-
-
     <?php
     if (isset($var['comments'])) {
         foreach ($var['comments'] as $comment) { ?>

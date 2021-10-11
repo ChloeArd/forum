@@ -15,7 +15,7 @@
             <a href="../../index.php">Accueil</a>
             <?php
             if (isset($_SESSION['id'])) {?>
-                <a href="../../View/accountView.php?id=<?=$_SESSION['id']?>"><i class="fas fa-user-circle margR"></i><?=$_SESSION['pseudo'] ?></a>
+                <a href="../../index.php?controller=user&action=view&id=<?=$_SESSION['id']?>"><i class="fas fa-user-circle margR"></i><?=$_SESSION['pseudo'] ?></a>
                 <?php
             }
             else { ?>

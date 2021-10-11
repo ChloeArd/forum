@@ -21,11 +21,13 @@ require_once './Controller/HomeController.php';
 require_once './Controller/CategorieController.php';
 require_once './Controller/SubjectController.php';
 require_once './Controller/CommentController.php';
+require_once './Controller/UserController.php';
 
 use Controller\CategorieController;
 use Controller\CommentController;
 use Controller\HomeController;
 use Controller\SubjectController;
+use Controller\UserController;
 
 if (isset($_GET['controller'])) {
     switch ($_GET['controller']) {
@@ -92,6 +94,24 @@ if (isset($_GET['controller'])) {
                         break;
                     case 'registration' :
                         $controller->registration();
+                        break;
+                }
+            }
+        case 'user' :
+            $controller = new UserController();
+            if (isset($_GET['action'])) {
+                switch ($_GET['action']) {
+                    case 'view' :
+                        $controller->account();
+                        break;
+                    case 'updateAccount' :
+                        $controller->updateInfo($_POST);
+                        break;
+                    case 'updatePass' :
+                        break;
+                    case 'delete' :
+                        break;
+                    case 'sujects' :
                         break;
                 }
             }
