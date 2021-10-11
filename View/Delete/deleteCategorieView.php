@@ -11,7 +11,7 @@ foreach ($categorie as $cat) { ?>
         <form method="post" action="#" class="flexColumn flexCenter width80 auto">
             <input type="hidden" value="<?=$cat->getId()?>" name="id">
             <input type="submit" name="submit" value="Oui" class="button margTop15">
-            <a href="../subjectsView.php" class="button2">Non</a>
+            <a href="../../index.php?controller=subjects&action=view&id=<?=$id?>" class="button2">Non</a>
         </form>
     </main>
 <?php

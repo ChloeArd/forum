@@ -5,7 +5,7 @@
             <a href="../../index.php?controller=user&action=view&id=<?=$_SESSION['id']?>">
                 <p class="border1">Mes informations</p>
             </a>
-            <a href="../accountSubjectView.php?id=<?=$_SESSION['id']?>">
+            <a href="../../index.php?controller=user&action=sujects&id=<?=$_SESSION['id']?>">
                 <p class="border1">Mes sujets</p>
             </a>
             <div class="border1">

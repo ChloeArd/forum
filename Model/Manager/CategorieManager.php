@@ -96,15 +96,17 @@ class CategorieManager {
     }
 
     /**
-     * update a description of categorie
+     * update a categorie
      * @param Categorie $categorie
      * @return bool
      */
     public function update (Categorie $categorie): bool {
-        $request = DB::getInstance()->prepare("UPDATE adfind SET description = :description WHERE id = :id");
+        $request = DB::getInstance()->prepare("UPDATE categorie SET title = :title, description = :description, picture = :picture WHERE id = :id");
 
         $request->bindValue(':id', $categorie->getId());
+        $request->bindValue(':title', $categorie->setTitle($categorie->getTitle()));
         $request->bindValue(':description', $categorie->setDescription($categorie->getDescription()));
+        $request->bindValue(':picture', $categorie->setPicture($categorie->getPicture()));
 
         return $request->execute();
     }

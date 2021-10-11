@@ -11,7 +11,7 @@ foreach ($comment as $com) { ?>
     <form method="post" action="" class="flexColumn flexCenter width80 auto">
         <input type="hidden" value="<?=$com->getId()?>" name="id">
         <input type="submit" name="submit" value="Oui" class="button margTop15">
-        <a href="../subjectView.php" class="button2">Non</a>
+        <a href="../../index.php?controller=subjects&action=viewOnly&id=<?=$com->getSubjectFk()->getId()?>&id2=<?=$com->getCategorieFk()->getId()?>" class="button2">Non</a>
     </form>
 </main>
 <?php

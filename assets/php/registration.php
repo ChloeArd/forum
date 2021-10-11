@@ -23,11 +23,11 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
         $user = $requete->fetch();
         // Checks if email or pseudo is not in use.
         if ($user['email'] === $email || $user['pseudo'] === $pseudo) {
-            header("Location: ../../View/registrationView.php?error=0");
+            header("Location: ../../index.php?controller=home&page=registration&error=0");
         }
         // The pseudo must contain a maximum of 20 characters
         elseif (strlen($pseudo) > 20) {
-            header("Location: ../../View/registrationView.php?error=1");
+            header("Location: ../../index.php?controller=home&page=registration&error=1");
         }
         // Check if the email address is valid.
         elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -48,13 +48,13 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
                     $sql->bindValue(':role_fk', 2);
                     $sql->execute();
 
-                    header("Location: ../../View/connectionView.php?success=0");
+                    header("Location: ../../index.php?controller=home&page=connection&success=0");
                 } else {
-                    header("Location: ../../View/registrationView.php?error=2");
+                    header("Location: ../../index.php?controller=home&page=registration&error=2");
                 }
             }
             else {
-                header("Location: ../../View/registrationView.php?error=3");
+                header("Location: ../../index.php?controller=home&page=registration&error=3");
             }
         }
         else {

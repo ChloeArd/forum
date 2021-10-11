@@ -108,10 +108,14 @@ if (isset($_GET['controller'])) {
                         $controller->updateInfo($_POST);
                         break;
                     case 'updatePass' :
+                        $controller->updatePass($_POST);
                         break;
                     case 'delete' :
+                        $controller->delete($_POST);
                         break;
                     case 'sujects' :
+                        $controller = new SubjectController();
+                        $controller->subjectsByUser($_GET['id']);
                         break;
                 }
             }

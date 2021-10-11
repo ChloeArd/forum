@@ -101,13 +101,28 @@ class UserManager {
      * @return bool
      */
     public function updateUser(User $user): bool {
-        $request = DB::getInstance()->prepare("UPDATE user SET pseudo = :pseudo, email = :email WHERE id = :id");
-        $request->bindValue(':id', $user->getId());
-        $_SESSION['pseudo'] = $user->setPseudo($user->getPseudo());
-        $request->bindValue(':pseudo', $user->setPseudo($user->getPseudo()));
-        $_SESSION['email'] = $user->setEmail($user->getEmail());
-        $request->bindValue(':email', $user->setEmail($user->getEmail()));
+        $id = $_SESSION['id'];
+        $requete = DB::getInstance()->prepare("SELECT * FROM user WHERE NOT id = :id");
+        $requete->bindValue(':id', $user->getId());
+        $requete->execute();
 
+        $user1 = $requete->fetchAll();
+        $count = count($user1);
+
+        for ($i = 0; $i < $count; $i++) {
+            // Checks if the email or nickname entered by the user is not already used
+            if ($user1[$i]['email'] === $user->getEmail() || $user1[$i]['pseudo'] === $user->getPseudo()) {
+                header("Location: ../index.php?controller=user&action=updateAccount&id=$id&error=0");
+            }
+            else {
+                $request = DB::getInstance()->prepare("UPDATE user SET pseudo = :pseudo, email = :email WHERE id = :id");
+                $request->bindValue(':id', $user->getId());
+                $_SESSION['pseudo'] = $user->setPseudo($user->getPseudo());
+                $request->bindValue(':pseudo', $user->setPseudo($user->getPseudo()));
+                $_SESSION['email'] = $user->setEmail($user->getEmail());
+                $request->bindValue(':email', $user->setEmail($user->getEmail()));
+            }
+        }
         return $request->execute();
     }
 

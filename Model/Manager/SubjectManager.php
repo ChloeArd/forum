@@ -90,6 +90,27 @@ class SubjectManager {
     }
 
     /**
+     * Allows you to display a subject based on ID of user.
+     * @param int $user_fk
+     * @return array
+     */
+    public function getSubjectIdUser(int $user_fk): array {
+        $subject = [];
+        $request = DB::getInstance()->prepare("SELECT * FROM subject WHERE user_fk = :user_fk");
+        $request->bindParam(":user_fk", $user_fk);
+        if($request->execute()) {
+            foreach ($request->fetchAll() as $info) {
+                $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
+                $user = UserManager::getManager()->getUser($info['user_fk']);
+                if($user->getId()) {
+                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user);
+                }
+            }
+        }
+        return $subject;
+    }
+
+    /**
      * Display a subject based on its ID of categorie
      * @param int $id
      * @return array

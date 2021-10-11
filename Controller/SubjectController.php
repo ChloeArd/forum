@@ -32,6 +32,14 @@ class SubjectController {
     }
 
     /**
+     * @param int $user_fk
+     */
+    public function subjectsByUser(int $user_fk) {
+        $manager = new SubjectManager();
+        $this->return("accountSubjectView", "Forum : Mes sujets", ['subjects' => $manager->getSubjectIdUser($user_fk)]);
+    }
+
+    /**
      * add a subject
      * @param $subject
      */

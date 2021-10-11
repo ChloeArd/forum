@@ -47,4 +47,67 @@ class UserController {
             $this->return("Update/updateAccountView", "Forum : Modifier mon profil");
         }
     }
+
+    /** update password of user
+     * @param $user
+     */
+    public function updatePass($user) {
+        if (isset($_SESSION['id'])) {
+            if (isset($user['id'], $user['passwordNow'], $user['passwordNew'], $user['passwordNewR'])) {
+                $id1 = $_SESSION['id'];
+                if ($user['id'] == $_SESSION['id']) {
+                    $userManager = new UserManager();
+
+                    $id = intval($user['id']);
+                    $passwordNow = trim(htmlentities($user['passwordNow']));
+                    $passwordNew = trim(htmlentities($user['passwordNew']));
+                    $passwordNewR = trim(htmlentities($user['passwordNewR']));
+
+                    // Check if the password is the current one
+                    if ($passwordNow === $_SESSION['password']) {
+                        $maj = preg_match('@[A-Z]@', $passwordNew);
+                        $min = preg_match('@[a-z]@', $passwordNew);
+                        $number = preg_match('@[0-9]@', $passwordNew);
+                        // Checks if the new password contains an uppercase, a lowercase, a number and that it has a length greater than or equal to 8.
+                        if ($maj && $min && $number && strlen($passwordNew) >= 8) {
+                            if ($passwordNew === $passwordNewR) {
+                                $user = new User($id, '', '', $passwordNew);
+                                $userManager->updatePasswordUser($user);
+                                header("Location: ../index.php?controller=user&action=view&id=$id&success=0");
+                            }
+                            else {
+                                header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=3");
+                            }
+                        }
+                        else {
+                            header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=0");
+                        }
+                    }
+                    else {
+                        header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=1");
+                    }
+                }
+                else {
+                    header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=2");
+                }
+            }
+            $this->return("Update/updatePasswordView", "Forum : Modifier mon mot de passe");
+        }
+    }
+
+    /**
+     * delete a user
+     * @param $user
+     */
+    public function delete($user) {
+        if (isset($_SESSION["id"])) {
+            if (isset($user['id'])) {
+                $userManager = new UserManager();
+                $id = intval($user['id']);
+                $userManager->deleteUser($id);
+                header("Location: ../index.php?&success=4");
+            }
+            $this->return('delete/deleteAccountView', "Forum : Supprimer mon compte");
+        }
+    }
 }
