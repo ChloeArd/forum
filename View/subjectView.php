@@ -40,7 +40,7 @@
                 <h2 class="gray">Commentaires</h2>
                 <?php
                 if (isset($_SESSION['id'])) {?>
-                    <a href="../index.php?controller=comments&action=new&id=<?=$_SESSION['id']?>&id2=<?=$subject->getId()?>&id3=<?=$subject->getCategorieFk()->getId()?>" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
+                    <a href="../index.php?controller=comments&action=new&id=<?=$_SESSION['id']?>&id2=<?=$subject->getId()?>&id3=<?=$subject->getCategorieFk()->getId()?>" id="buttonAdCom" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
                     <?php
                 }
                     ?>

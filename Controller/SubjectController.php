@@ -59,9 +59,11 @@ class SubjectController {
                 $id = $subject['categorie_fk'];
                 $user_fk = $subject['user_fk'];
 
+                // the title size must be less than or equal to 40
                 if (strlen($title) >= 40) {
                     header("Location: ../index.php?controller=subjects&action=new&error=0");
                 }
+                // We check if the URL is valid
                 if (filter_var($picture, FILTER_VALIDATE_URL)) {
                     $categorie_fk = $categorieManager->getCategorie($categorie_fk);
                     $user_fk = $userManager->getUser($user_fk);
@@ -99,9 +101,11 @@ class SubjectController {
                 $id2 = $subject['categorie_fk'];
                 $user_fk = $subject['user_fk'];
 
+                // the title size must be less than or equal to 40
                 if (strlen($title) >= 40) {
                     header("Location: ../index.php?controller=subjects&action=update&error=0");
                 }
+                // We check if the URL is valid
                 if (filter_var($picture, FILTER_VALIDATE_URL)) {
                     $categorie_fk = $categorieManager->getCategorie($categorie_fk);
                     $user_fk = $userManager->getUser($user_fk);

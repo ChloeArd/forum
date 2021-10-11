@@ -16,7 +16,7 @@
         </div>
         <div class="width80 flexCenter">
             <div class="width80 border flexCenter flexColumn">
-                <form method="post" action="" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
+                <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">
                     <label for="pseudo">Pseudo</label>
                     <input type="text" id="pseudo" name="pseudo" value="<?=$_SESSION['pseudo']?>" required>
                     <label for="email">Email</label>

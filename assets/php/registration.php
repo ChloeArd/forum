@@ -35,6 +35,7 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
             $min = preg_match('@[a-z]@', $password);
             $number = preg_match('@[0-9]@', $password);
 
+            // Check if the 2 entered passwords are identical
             if ($password === $passwordR) {
                 // Checks if the password contains upper case, lower case, number and at least 8 characters.
                 if ($maj && $min && $number && strlen($password) >= 8) {

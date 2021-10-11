@@ -17,25 +17,6 @@ class UserManager {
     }
 
     /**
-     * Return all users.
-     * @return array
-     */
-    public function getUsers(): array {
-        $users = [];
-        $request = DB::getInstance()->prepare("SELECT * FROM user");
-        $result = $request->execute();
-        if($result) {
-            foreach($request->fetchAll() as $info) {
-                $role = RoleManager::getManager()->getRole($info['role_fk']);
-                if ($role->getId()) {
-                    $users[] = new User($info['id'], $info['pseudo'], $info['email'],'', $role);
-                }
-            }
-        }
-        return $users;
-    }
-
-    /**
      * Return a user based on id.
      * @param $id
      * @return User
@@ -54,26 +35,6 @@ class UserManager {
             $user->setPassword(''); // We do not display the password
             $role = $this->roleManager->getRole($info['role_fk']);
             $user->setRoleFk($role);
-        }
-        return $user;
-    }
-
-    /**
-     * Display a user based on id.
-     * @param int $id
-     * @return array
-     */
-    public function getUserID(int $id): array {
-        $user = [];
-        $request = DB::getInstance()->prepare("SELECT * FROM user WHERE id = :id");
-        $request->bindParam(":id", $id);
-        if($request->execute()) {
-            foreach($request->fetchAll() as $info) {
-                $role = RoleManager::getManager()->getRole($info['role_fk']);
-                if ($role->getId()) {
-                    $user[] = new User($info['id'], $info['pseudo'] ,$info['email'],'', $role);
-                }
-            }
         }
         return $user;
     }
@@ -123,19 +84,6 @@ class UserManager {
                 $request->bindValue(':email', $user->setEmail($user->getEmail()));
             }
         }
-        return $request->execute();
-    }
-
-    /**
-     * Change a user's role.
-     * @param User $user
-     * @return bool
-     */
-    public function updateRoleUser(User $user): bool {
-        $request = DB::getInstance()->prepare("UPDATE user SET role_fk = :role_fk WHERE id = :id");
-        $request->bindValue(':id', $user->getId());
-        $request->bindValue(':role_fk', $user->setRoleFk($user->getRoleFk())->getId());
-
         return $request->execute();
     }
 

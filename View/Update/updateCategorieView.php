@@ -6,7 +6,7 @@ $categorie = $manager->getCategorieId($id);
 foreach ($categorie as $cat) { ?>
     <main>
         <h1 class="center">Modifier la catégorie : <span class="salmon"><?=$cat->getTitle()?></span></h1>
-        <form method="post" action="" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
+        <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" maxlength="20" value="<?=$cat->getTitle()?>" required>
             <label for="description">Description</label>

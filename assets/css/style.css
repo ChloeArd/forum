@@ -333,3 +333,56 @@ textarea {
 .size20 {
     font-size: 20px;
 }
+
+@media screen and (max-width: 1500px) {
+    .button3 {
+        right: 25%;
+    }
+    .buttonPos3 {
+        right: 20%;
+    }
+    .buttonPos4 {
+        right: 15%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .categories {
+        width: 40%;
+    }
+    main {
+        width: 98%;
+    }
+    input, textarea {
+        width: 80%;
+    }
+    form {
+        width: 100%;
+    }
+    #buttonAdCom {
+        margin-top: -70px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .border1 {
+        font-size: 10px;
+    }
+    .button3 {
+        right: 30%;
+    }
+    .buttonPos3 {
+        right: 23%;
+    }
+    .buttonPos4 {
+        right: 16%;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .categories {
+        width: 80%;
+    }
+
+}

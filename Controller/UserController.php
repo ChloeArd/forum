@@ -31,13 +31,17 @@ class UserController {
                     $pseudo = trim(htmlentities($user['pseudo']));
                     $email = trim(htmlentities($user['email']));
 
+                    // the pseudo size must be less than or equal to 20
                     if (strlen($pseudo) > 20) {
-                        header("Location: ../../index.php?controller=user&action=updateAccount&id=$id&error=1");
+                        // We check if the EMAIL is valid
+                        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                            $user = new User($id, $pseudo, $email);
+                            $userManager->updateUser($user);
+                            header("Location: ../index.php?controller=user&action=view&id=$id&success=0");
+                        }
                     }
-                    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        $user = new User($id, $pseudo, $email);
-                        $userManager->updateUser($user);
-                        header("Location: ../index.php?controller=user&action=view&id=$id&success=0");
+                    else {
+                        header("Location: ../../index.php?controller=user&action=updateAccount&id=$id&error=1");
                     }
                 }
                 else {

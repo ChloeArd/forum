@@ -17,7 +17,7 @@
         </div>
         <div class="width80 flexCenter">
             <div class="width80 border flexCenter flexColumn">
-                <form method="post" action="" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
+                <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">
                     <label for="passNow">Mot de passe actuel</label>
                     <input type="password" id="passNow" name="passwordNow" required>
                     <label for="passNew">Nouveau mot de passe</label>

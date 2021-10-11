@@ -5,7 +5,6 @@ use Controller\Traits\ReturnViewTrait;
 use Forum\Comment\CommentManager;
 use Forum\Entity\Comment;
 use Forum\Categorie\CategorieManager;
-use Forum\Entity\Subject;
 use Forum\Subject\SubjectManager;
 use Forum\User\UserManager;
 
@@ -54,16 +53,12 @@ class CommentController {
         if (isset($_SESSION["id"])) {
             if (isset($comment['id'], $comment['date'], $comment['comment'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
                 $commentManager = new CommentManager();
-                $subjectManager = new SubjectManager();
                 $userManager = new UserManager();
-                $categorieManager = new CategorieManager();
 
                 $id = intval($comment['id']);
                 $date = trim($comment['date']);
                 $comment1 = htmlentities(trim(ucfirst($comment['comment'])));
-                $subject_fk = intval($comment['subject_fk']);
                 $id1 = $comment['subject_fk'];
-                $categorie_fk = intval($comment['categorie_fk']);
                 $id2 = $comment['categorie_fk'];
                 $user_fk = intval($comment['user_fk']);
 

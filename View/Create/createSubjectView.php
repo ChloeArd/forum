@@ -1,6 +1,6 @@
  <main>
     <h1 class="center">Ajouter un sujet</h1>
-    <form method="post" action="" class="flexColumn flexCenter width80 auto" enctype="multipart/form-data">
+    <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">
         <label for="title">Titre</label>
         <input type="text" id="title" maxlength="40" name="title" required>
         <label for="picture">Insérer le lien d'une image</label>
