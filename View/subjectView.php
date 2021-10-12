@@ -1,3 +1,24 @@
+<?php
+$return = "";
+$id = "";
+
+if (isset($_GET['success'])) {
+    $id = "success";
+    switch ($_GET['success']) {
+        case '0':
+            $return = "Votre commentaire a été ajouté !";
+            break;
+        case '1':
+            $return = "Le commentaire a bien été modifié !";
+            break;
+        case '2' :
+            $return = "Le commentaire a bien été supprimé !";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
 <main>
     <?php
     if (isset($var['subject'])) {

@@ -60,21 +60,23 @@ class SubjectController {
                 $user_fk = $subject['user_fk'];
 
                 // the title size must be less than or equal to 40
-                if (strlen($title) >= 40) {
-                    header("Location: ../index.php?controller=subjects&action=new&error=0");
-                }
-                // We check if the URL is valid
-                if (filter_var($picture, FILTER_VALIDATE_URL)) {
-                    $categorie_fk = $categorieManager->getCategorie($categorie_fk);
-                    $user_fk = $userManager->getUser($user_fk);
-                    if ($user_fk->getId()) {
-                        $subject = new Subject(null, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
-                        $subjectManager->add($subject);
-                        header("Location: ../index.php?controller=subjects&action=view&id=$id&success=0");
+                if (strlen($title) <= 40) {
+                    // We check if the URL is valid
+                    if (filter_var($picture, FILTER_VALIDATE_URL)) {
+                        $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                        $user_fk = $userManager->getUser($user_fk);
+                        if ($user_fk->getId()) {
+                            $subject = new Subject(null, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
+                            $subjectManager->add($subject);
+                            header("Location: ../index.php?controller=subjects&action=view&id=$id&success=0");
+                        }
+                    }
+                    else {
+                        header("Location: ../index.php?controller=subjects&action=new&error=1");
                     }
                 }
                 else {
-                    header("Location: ../index.php?controller=subjects&action=new&error=1");
+                    header("Location: ../index.php?controller=subjects&action=new&error=0");
                 }
             }
             $this->return("Create/createSubjectView", "Forum : Créer un sujet");
@@ -103,20 +105,23 @@ class SubjectController {
                 $user_fk = $subject['user_fk'];
 
                 // the title size must be less than or equal to 40
-                if (strlen($title) >= 40) {
-                    header("Location: ../index.php?controller=subjects&action=update&error=0");
-                }
-                // We check if the URL is valid
-                if (filter_var($picture, FILTER_VALIDATE_URL)) {
-                    $categorie_fk = $categorieManager->getCategorie($categorie_fk);
-                    $user_fk = $userManager->getUser($user_fk);
-                    if ($user_fk->getId()) {
-                        $subject = new Subject($id, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
-                        $subjectManager->update($subject);
-                        header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=1");
+                if (strlen($title) <= 40) {
+                    // We check if the URL is valid
+                    if (filter_var($picture, FILTER_VALIDATE_URL)) {
+                        $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                        $user_fk = $userManager->getUser($user_fk);
+                        if ($user_fk->getId()) {
+                            $subject = new Subject($id, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
+                            $subjectManager->update($subject);
+                            header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=1");
+                        }
                     }
-                } else {
-                    header("Location: ../index.php?controller=subjects&action=update&error=1");
+                    else {
+                        header("Location: ../index.php?controller=subjects&action=update&error=1");
+                    }
+                }
+                else {
+                    header("Location: ../index.php?controller=subjects&action=update&error=0");
                 }
             }
             $this->return("Update/updateSubjectView", "Forum : Modifier un sujet");

@@ -66,7 +66,7 @@ class CommentController {
                 if ($user_fk->getId()) {
                     $comment = new Comment($id, $date, $comment1);
                     $commentManager->update($comment);
-                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=0");
+                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=1");
                 }
             }
             $this->return("Update/updateCommentView", "Forum : Modifier un commentaire");
@@ -79,11 +79,13 @@ class CommentController {
      */
     public function delete($comment) {
         if (isset($_SESSION["id"])) {
-            if (isset($comment['id'])) {
+            if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'])) {
                 $commentManager = new CommentManager();
                 $id = intval($comment['id']);
+                $categorie = $comment['categorie_fk'];
+                $subject = $comment['subject_fk'];
                 $commentManager->delete($id);
-                header("Location: ../index.php?&success=5");
+                header("Location: ../index.php?controller=subjects&action=viewOnly&id=$subject&id2=$categorie&success=2");
             }
             $this->return('delete/deleteCommentView', "Forum : Supprimer un commentaire");
         }
