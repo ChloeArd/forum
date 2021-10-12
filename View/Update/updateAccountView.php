@@ -1,7 +1,7 @@
  <main>
     <h1 class="center">Modifier mes informations</h1>
     <div id="containerCategories" class=" flexRow wrap">
-        <div class="width20">
+        <div id="menuAccount" class="width20">
             <a href="../../index.php?controller=user&action=view&id=<?=$_SESSION['id']?>">
                 <p class="border1">Mes informations</p>
             </a>
@@ -14,7 +14,7 @@
                 </form>
             </div>
         </div>
-        <div class="width80 flexCenter">
+        <div id="containerAccount" class="width80 flexCenter">
             <div class="width80 border flexCenter flexColumn">
                 <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">
                     <label for="pseudo">Pseudo</label>

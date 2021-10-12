@@ -48,7 +48,7 @@
         <?php
         if (isset($var['subjects'])) {
             foreach ($var['subjects'] as $subject) {?>
-                <a href="../index.php?controller=subjects&action=viewOnly&id=<?=$subject->getId()?>&id2=<?=$subject->getCategorieFk()->getId()?>" class="border1 flexRow">
+                <a id="subjects" href="../index.php?controller=subjects&action=viewOnly&id=<?=$subject->getId()?>&id2=<?=$subject->getCategorieFk()->getId()?>" class="border1 flexRow">
                     <div class="width20 flexCenter">
                         <p><?=$subject->getTitle()?></p>
                     </div>
