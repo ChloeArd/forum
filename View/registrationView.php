@@ -1,3 +1,33 @@
+<?php
+$return = "";
+$id = "";
+
+if (isset($_GET['error'])) {
+    $id = "error";
+    switch ($_GET['error']) {
+        case '0':
+            $return = "L'email ou le pseudo est déjà utilisé !";
+            break;
+        case '1':
+            $return = "Le pseudo contient plus de 20 caractères !";
+            break;
+        case '2' :
+            $return = "Le mot de passe ne contient pas une majuscule ou une une minuscule ou un chiffre ou est inférieure à 8 caractères";
+            break;
+        case '3' :
+            $return = "Les 2 mots de passes ne correspondent pas";
+            break;
+        case '4' :
+            $return = "L'email n'est pas valide";
+            break;
+        case '5' :
+            $return = "Tous les champs ne sont pas entrées";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
 <main>
     <h1 class="center">Inscription</h1>
     <form method="post" action="../assets/php/registration.php" class="flexColumn flexCenter width80 auto">

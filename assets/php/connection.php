@@ -29,9 +29,9 @@ if (isset($_POST["pseudo"], $_POST["password"])) {
         header("Location: ../../index.php?success=0&id=$id");
     }
     else {
-        header("Location: ../../index.php?controller=home&page=connection&error=1");
+        header("Location: ../../index.php?controller=home&page=connection&error=0");
     }
 }
 else {
-    header("Location: ../../index.php?controller=home&page=connection&error=2");
+    header("Location: ../../index.php?controller=home&page=connection&error=1");
 }
