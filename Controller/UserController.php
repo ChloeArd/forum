@@ -109,7 +109,7 @@ class UserController {
                 $userManager = new UserManager();
                 $id = intval($user['id']);
                 $userManager->deleteUser($id);
-                header("Location: ../index.php?&success=4");
+                header("Location: ../index.php?&success=5");
             }
             $this->return('delete/deleteAccountView', "Forum : Supprimer mon compte");
         }

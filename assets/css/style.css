@@ -108,6 +108,38 @@ footer {
     flex-wrap: wrap;
 }
 
+.modal2 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    font-size: 22px;
+    color: white;
+}
+
+.modal2, #closeModal {
+    position: absolute;
+    z-index: 20;
+}
+
+#closeModal {
+    top: 2px;
+    right: 30px;
+    background-color: transparent;
+    padding: 6px;
+    font-size: 15px;
+    border: none;
+    display: none;
+}
+
+#success {
+    background-color: #64be64;
+}
+
+#error, .backgroundRed {
+    background-color: #fa3535;
+}
+
 #containerCategories {
     margin-top: 40px;
 }

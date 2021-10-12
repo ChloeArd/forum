@@ -1,3 +1,25 @@
+<?php
+$return = "";
+$id = "";
+
+if (isset($_GET['success'])) {
+    $id = "success";
+    switch ($_GET['success']) {
+        case '0':
+            $return = "Vous avez crée un sujet !";
+            break;
+        case '1':
+            $return = "Vous avez bien modifié un sujet !";
+            break;
+        case '2':
+            $return = "Vous avez bien supprimé un sujet !";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
+
 <main>
     <?php
     if (isset($var['categorie'])) {

@@ -72,7 +72,8 @@ class SubjectController {
                         $subjectManager->add($subject);
                         header("Location: ../index.php?controller=subjects&action=view&id=$id&success=0");
                     }
-                } else {
+                }
+                else {
                     header("Location: ../index.php?controller=subjects&action=new&error=1");
                 }
             }
@@ -112,7 +113,7 @@ class SubjectController {
                     if ($user_fk->getId()) {
                         $subject = new Subject($id, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
                         $subjectManager->update($subject);
-                        header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=0");
+                        header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=1");
                     }
                 } else {
                     header("Location: ../index.php?controller=subjects&action=update&error=1");
@@ -128,11 +129,12 @@ class SubjectController {
      */
     public function delete($subject) {
         if (isset($_SESSION["id"])) {
-            if (isset($subject['id'])) {
+            if (isset($subject['id'], $subject['categorie_fk'])) {
                 $subjectManager = new SubjectManager();
+                $categrorie = intval($subject['categorie_fk']);
                 $id = intval($subject['id']);
                 $subjectManager->delete($id);
-                header("Location: ../index.php?&success=4");
+                header("Location: ../index.php?controller=subjects&action=view&id=$categrorie&success=2");
             }
             $this->return('delete/deleteSubjectView', "Forum : Supprimer un sujet");
         }

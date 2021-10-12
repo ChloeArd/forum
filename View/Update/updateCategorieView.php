@@ -1,9 +1,28 @@
 <?php
+$return = "";
+$id2 = "";
+
+if (isset($_GET['error'])) {
+    $id2 = "error";
+    switch ($_GET['error']) {
+        case '0':
+            $return = "Le titre ne doit pas dépassé 20 caractères !";
+            break;
+        case '1':
+            $return = "L'email n'est pas valide !";
+            break;
+        case '2' :
+            $return = "Tous les champs ne sont pas complétés !";
+            break;
+    }
+}
+
 $id = $_GET['id'];
 $manager = new \Forum\Categorie\CategorieManager();
 $categorie = $manager->getCategorieId($id);
 
 foreach ($categorie as $cat) { ?>
+    <div id='<?= $id2?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
     <main>
         <h1 class="center">Modifier la catégorie : <span class="salmon"><?=$cat->getTitle()?></span></h1>
         <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">

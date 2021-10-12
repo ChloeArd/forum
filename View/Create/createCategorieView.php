@@ -1,5 +1,25 @@
+<?php
+$return = "";
+$id = "";
 
-    <main>
+if (isset($_GET['error'])) {
+    $id = "error";
+    switch ($_GET['error']) {
+        case '0':
+            $return = "Le titre ne doit pas dépassé 20 caractères !";
+            break;
+        case '1':
+            $return = "L'email n'est pas valide !";
+            break;
+        case '2' :
+            $return = "Tous les champs ne sont pas complétés !";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
+<main>
         <h1 class="center">Ajouter une catégorie</h1>
         <form method="post" action="" class="flexColumn flexCenter auto">
             <label for="title">Titre</label>

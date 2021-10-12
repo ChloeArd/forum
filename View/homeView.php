@@ -1,3 +1,33 @@
+<?php
+$return = "";
+$id = "";
+
+if (isset($_GET['success'])) {
+    $id = "success";
+    switch ($_GET['success']) {
+        case '0':
+            $return = "Vous êtes bien connecté(e) !";
+            break;
+        case '1':
+            $return = "Vous êtes bien déconnecté(e) !";
+            break;
+        case '2' :
+            $return = "Votre catégorie est bien crée !";
+            break;
+        case '3' :
+            $return = "Vous avez bien modifié une catégorie !";
+            break;
+        case '4' :
+            $return = "Vous avez bien supprimé une catégorie !";
+            break;
+        case '5' :
+            $return = "Vous avez bien supprimé votre compte";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
 <main>
     <h1 class="center">Bienvenue sur le forum <span class="salmon">Salmon </span>!</h1>
     <div id="containerCategories" class="flexCenter flexRow wrap">
@@ -6,8 +36,8 @@
             foreach ($var['categories'] as $categorie) { ?>
                 <a href="../index.php?controller=subjects&action=view&id=<?=$categorie->getId()?>" class="flexColumn flexCenter categories">
                     <img class="imageHome" src="<?=$categorie->getPicture() ?>" alt="<?=$categorie->getTitle() ?>">
-                    <p class="size20"><?=$categorie->getTitle() ?></p>
-                    <p class="gray"><?=$categorie->getDescription() ?></p>
+                    <p class="size20 center"><?=$categorie->getTitle() ?></p>
+                    <p class="gray center"><?=$categorie->getDescription() ?></p>
                 </a>
             <?php
             }

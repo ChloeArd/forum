@@ -28,7 +28,7 @@ class CategorieController {
                     $user_fk = $categorie['user_fk'];
 
                     // the title size must be less than or equal to 20
-                    if (!strlen($title) >= 20) {
+                    if (strlen($title) <= 20) {
                         // We check if the URL is valid
                         if (filter_var($picture, FILTER_VALIDATE_URL)) {
                             $user_fk = $userManager->getUser($user_fk);
@@ -45,6 +45,9 @@ class CategorieController {
                         header("Location: ../index.php?controller=categories&action=new&error=0");
                     }
                 }
+                else {
+                    header("Location: ../index.php?controller=categories&action=new&error=2");
+                }
             }
             $this->return("Create/createCategorieView", "Forum : Créer une catégorie");
         }
@@ -57,33 +60,36 @@ class CategorieController {
     public function update($categorie) {
         if (isset($_SESSION["id"])) {
             if ($_SESSION['role_fk'] === "1") {
+                $id = intval($categorie['id']);
                 if (isset($categorie['id'], $categorie['title'], $categorie['description'], $categorie['picture'], $categorie['user_fk'])) {
                     $userManager = new UserManager();
                     $categorieManager = new CategorieManager();
 
-                    $id = intval($categorie['id']);
                     $title = htmlentities(trim(ucfirst($categorie['title'])));
                     $description = htmlentities(trim(ucfirst($categorie['description'])));
                     $picture = trim($categorie['picture']);
                     $user_fk = $categorie['user_fk'];
 
                     // the title size must be less than or equal to 20
-                    if (strlen($title) >= 20) {
+                    if (strlen($title) <= 20) {
                         // We check if the URL is valid
                         if (filter_var($picture, FILTER_VALIDATE_URL)) {
                             $user_fk = $userManager->getUser($user_fk);
                             if ($user_fk->getId()) {
                                 $categorie = new Categorie($id, $title, $description, $picture, $user_fk);
                                 $categorieManager->update($categorie);
-                                header("Location: ../index.php?success=2");
+                                header("Location: ../index.php?success=3");
                             }
                         } else {
-                            header("Location: ../index.php?controller=categories&action=update&error=1");
+                            header("Location: ../index.php?controller=categories&action=update&id=$id&error=1");
                         }
                     }
                     else {
-                        header("Location: ../index.php?controller=categories&action=update&error=0");
+                        header("Location: ../index.php?controller=categories&action=update&id=$id&error=0");
                     }
+                }
+                else {
+                    header("Location: ../index.php?controller=categories&action=update&id=$id&error=2");
                 }
             }
             $this->return("Update/updateCategorieView", "Forum : Modifier une catégorie");
@@ -101,7 +107,7 @@ class CategorieController {
                     $categorieManager = new CategorieManager();
                     $id = intval($categorie['id']);
                     $categorieManager->delete($id);
-                    header("Location: ../index.php?&success=3");
+                    header("Location: ../index.php?&success=4");
                 }
                 $this->return('delete/deleteCategorieView', "Forum : Supprimer une catégorie");
             }
