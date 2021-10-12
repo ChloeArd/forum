@@ -73,7 +73,7 @@ class UserManager {
         for ($i = 0; $i < $count; $i++) {
             // Checks if the email or nickname entered by the user is not already used
             if ($user1[$i]['email'] === $user->getEmail() || $user1[$i]['pseudo'] === $user->getPseudo()) {
-                header("Location: ../index.php?controller=user&action=updateAccount&id=$id&error=0");
+                header("Location: ../index.php?controller=user&action=updateAccount&id=$id&error=2");
             }
             else {
                 $request = DB::getInstance()->prepare("UPDATE user SET pseudo = :pseudo, email = :email WHERE id = :id");

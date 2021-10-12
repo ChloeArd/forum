@@ -119,8 +119,6 @@ if (isset($_GET['controller'])) {
                         break;
                 }
             }
-        default:
-            break;
     }
 }
 else {

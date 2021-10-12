@@ -1,3 +1,24 @@
+<?php
+$return = "";
+$id = "";
+
+if (isset($_GET['error'])) {
+    $id = "error";
+    switch ($_GET['error']) {
+        case '0':
+            $return = "Les 2 nouveaux mots de passes ne correspondent pas !";
+            break;
+        case '1':
+            $return = "Le nouveau mot de passe ne contient soit pas de majuscule, minuscule, chiffre ou est inférieur à 8 caractères !";
+            break;
+        case '2' :
+            $return = "Le mot de passe acutel ne correspond pas !";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
 <main>
     <h1 class="center">Changer mon mot de passe</h1>
     <div id="containerCategories" class=" flexRow wrap">
@@ -14,10 +35,9 @@
                 </form>
             </div>
         </div>
-        </div>
         <div id="containerAccount" class="width80 flexCenter">
             <div class="width80 border flexCenter flexColumn">
-                <form method="post" action="" class="flexColumn flexCenter auto" enctype="multipart/form-data">
+                <form method="post" action="" class="flexColumn flexCenter auto width80" enctype="multipart/form-data">
                     <label for="passNow">Mot de passe actuel</label>
                     <input type="password" id="passNow" name="passwordNow" required>
                     <label for="passNew">Nouveau mot de passe</label>

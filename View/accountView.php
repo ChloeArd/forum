@@ -1,3 +1,21 @@
+<?php
+$return = "";
+$id = "";
+
+if (isset($_GET['success'])) {
+    $id = "success";
+    switch ($_GET['success']) {
+        case '0':
+            $return = "Vous avez bien modifié vos informations !";
+            break;
+        case '1':
+            $return = "Votre mot de passe a bien était changé !";
+            break;
+    }
+}
+?>
+
+<div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
 <main>
     <h1 class="center">Bienvenue <span class="salmon"><?=$_SESSION['pseudo']?></span> !</h1>
     <div id="containerCategories" class=" flexRow wrap">

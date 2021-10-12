@@ -32,12 +32,15 @@ class UserController {
                     $email = trim(htmlentities($user['email']));
 
                     // the pseudo size must be less than or equal to 20
-                    if (strlen($pseudo) > 20) {
+                    if (strlen($pseudo) <= 20) {
                         // We check if the EMAIL is valid
                         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                             $user = new User($id, $pseudo, $email);
                             $userManager->updateUser($user);
                             header("Location: ../index.php?controller=user&action=view&id=$id&success=0");
+                        }
+                        else {
+                            header("Location: ../../index.php?controller=user&action=updateAccount&id=$id&error=0");
                         }
                     }
                     else {
@@ -45,7 +48,7 @@ class UserController {
                     }
                 }
                 else {
-                    header("Location: ../../index.php?controller=user&action=updateAccount&id=$id1&error=2");
+                    header("Location: ../../index.php?controller=user&action=updateAccount&id=$id1&error=3");
                 }
             }
             $this->return("Update/updateAccountView", "Forum : Modifier mon profil");
@@ -77,22 +80,22 @@ class UserController {
                             if ($passwordNew === $passwordNewR) {
                                 $user = new User($id, '', '', $passwordNew);
                                 $userManager->updatePasswordUser($user);
-                                header("Location: ../index.php?controller=user&action=view&id=$id&success=0");
+                                header("Location: ../index.php?controller=user&action=view&id=$id&success=1");
                             }
                             else {
-                                header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=3");
+                                header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=0");
                             }
                         }
                         else {
-                            header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=0");
+                            header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=1");
                         }
                     }
                     else {
-                        header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=1");
+                        header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=2");
                     }
                 }
                 else {
-                    header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=2");
+                    header("Location: ../../index.php?controller=user&action=updatePass&id=$id1&error=3");
                 }
             }
             $this->return("Update/updatePasswordView", "Forum : Modifier mon mot de passe");
