@@ -1,12 +1,12 @@
 <?php
-namespace Controller;
+namespace Chloe\Forum\Controller;
 
-use Controller\Traits\ReturnViewTrait;
-use Forum\Comment\CommentManager;
-use Forum\Entity\Comment;
-use Forum\Categorie\CategorieManager;
-use Forum\Subject\SubjectManager;
-use Forum\User\UserManager;
+use Chloe\Forum\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Comment\CommentManager;
+use Chloe\Forum\Entity\Comment;
+use Chloe\Forum\Categorie\CategorieManager;
+use Chloe\Forum\Subject\SubjectManager;
+use Chloe\Forum\User\UserManager;
 
 class CommentController {
 

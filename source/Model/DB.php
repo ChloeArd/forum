@@ -1,6 +1,6 @@
 <?php
 
-namespace Forum;
+namespace Chloe\Forum;
 
 use Exception;
 use PDO;

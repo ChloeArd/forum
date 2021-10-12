@@ -1,8 +1,6 @@
 <?php
 
-namespace Forum\Entity;
-
-use Forum\User\UserManager;
+namespace Chloe\Forum\Entity;
 
 class Comment {
 
