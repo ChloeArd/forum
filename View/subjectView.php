@@ -120,7 +120,7 @@ if (isset($_GET['success'])) {
                 </div>
                 <div class="comment">
                     <?php
-                    if ($comment->getArchive() === 1) { ?>
+                    if ($comment->getArchive() === 1 || $comment->getSubjectFk()->getArchive() === 1 || $comment->getCategorieFk()->getArchive() === 1) { ?>
                         <p class="red">(Archivé)</p>
                     <?php
                     }
