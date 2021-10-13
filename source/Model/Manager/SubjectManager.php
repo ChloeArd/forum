@@ -1,11 +1,11 @@
 <?php
-namespace Forum\Subject;
+namespace Chloe\Forum\Subject;
 
-use Forum\DB;
-use Forum\Entity\Subject;
-use Forum\User\UserManager;
-use Forum\Categorie\CategorieManager;
-use Forum\Manager\Traits\ManagerTrait;
+use Chloe\Forum\DB;
+use Chloe\Forum\Entity\Subject;
+use Chloe\Forum\User\UserManager;
+use Chloe\Forum\Categorie\CategorieManager;
+use Chloe\Forum\Manager\Traits\ManagerTrait;
 
 class SubjectManager {
 

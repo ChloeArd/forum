@@ -1,10 +1,10 @@
 <?php
-namespace Forum\User;
+namespace Chloe\Forum\User;
 
-use Forum\DB;
-use Forum\Entity\User;
-use Forum\Role\RoleManager;
-use Forum\Manager\Traits\ManagerTrait;
+use Chloe\Forum\DB;
+use Chloe\Forum\Entity\User;
+use Chloe\Forum\Role\RoleManager;
+use Chloe\Forum\Manager\Traits\ManagerTrait;
 
 class UserManager {
 

@@ -1,5 +1,5 @@
 <?php
-namespace Forum\Entity;
+namespace Chloe\Forum\Entity;
 
 class Role {
 

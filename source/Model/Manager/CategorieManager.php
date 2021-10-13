@@ -1,10 +1,10 @@
 <?php
-namespace Forum\Categorie;
+namespace Chloe\Forum\Categorie;
 
-use Forum\DB;
-use Forum\Entity\Categorie;
-use Forum\User\UserManager;
-use Forum\Manager\Traits\ManagerTrait;
+use Chloe\Forum\DB;
+use Chloe\Forum\Entity\Categorie;
+use Chloe\Forum\User\UserManager;
+use Chloe\Forum\Manager\Traits\ManagerTrait;
 
 class CategorieManager {
 
