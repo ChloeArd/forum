@@ -23,11 +23,11 @@ require_once "Model/Manager/RoleManager.php";
 require_once "Model/Manager/SubjectManager.php";
 require_once "Model/Manager/UserManager.php";
 
-use Chloe\Forum\Controller\CategorieController;
-use Chloe\Forum\Controller\CommentController;
-use Chloe\Forum\Controller\HomeController;
-use Chloe\Forum\Controller\SubjectController;
-use Chloe\Forum\Controller\UserController;
+use Forum\Controller\CategorieController;
+use Forum\Controller\CommentController;
+use Forum\Controller\HomeController;
+use Forum\Controller\SubjectController;
+use Forum\Controller\UserController;
 
 if (isset($_GET['controller'])) {
     switch ($_GET['controller']) {
@@ -84,6 +84,9 @@ if (isset($_GET['controller'])) {
                         break;
                     case 'update' :
                         $controllerComments->update($_POST);
+                        break;
+                    case 'archive' :
+                        $controllerComments->archive($_POST);
                         break;
                     case 'delete' :
                         $controllerComments->delete($_POST);

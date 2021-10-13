@@ -1,12 +1,12 @@
 <?php
-namespace Chloe\Forum\Controller;
+namespace Forum\Controller;
 
-use Chloe\Forum\Controller\Traits\ReturnViewTrait;
-use Chloe\Forum\Categorie\CategorieManager;
-use Chloe\Forum\Comment\CommentManager;
-use Chloe\Forum\Entity\Subject;
-use Chloe\Forum\Subject\SubjectManager;
-use Chloe\Forum\User\UserManager;
+use Forum\Controller\Traits\ReturnViewTrait;
+use Forum\Categorie\CategorieManager;
+use Forum\Comment\CommentManager;
+use Forum\Entity\Subject;
+use Forum\Subject\SubjectManager;
+use Forum\User\UserManager;
 
 class SubjectController {
 
@@ -140,8 +140,9 @@ class SubjectController {
                 $categorieManager = new CategorieManager();
 
                 $id = intval($subject['id']);
-                $categorie_fk = $subject['categorie_fk'];
-                $user_fk = $subject['user_fk'];
+                $categorie_fk = intval($subject['categorie_fk']);
+                $id2 = $categorie_fk;
+                $user_fk = intval($subject['user_fk']);
 
                 $categorie_fk = $categorieManager->getCategorie($categorie_fk);
                 $user_fk = $userManager->getUser($user_fk);
@@ -149,7 +150,7 @@ class SubjectController {
                     // 1 means the category is archived.
                     $subject = new Subject($id, '', '', '', '','', $categorie_fk, $user_fk, 1 );
                     $subjectManager->archive($subject);
-                    header("Location: ../index.php?success=3");
+                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=3");
                 }
             }
         }

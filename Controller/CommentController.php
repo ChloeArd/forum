@@ -1,12 +1,12 @@
 <?php
-namespace Chloe\Forum\Controller;
+namespace Forum\Controller;
 
-use Chloe\Forum\Controller\Traits\ReturnViewTrait;
-use Chloe\Forum\Comment\CommentManager;
-use Chloe\Forum\Entity\Comment;
-use Chloe\Forum\Categorie\CategorieManager;
-use Chloe\Forum\Subject\SubjectManager;
-use Chloe\Forum\User\UserManager;
+use Forum\Controller\Traits\ReturnViewTrait;
+use Forum\Comment\CommentManager;
+use Forum\Entity\Comment;
+use Forum\Categorie\CategorieManager;
+use Forum\Subject\SubjectManager;
+use Forum\User\UserManager;
 
 class CommentController {
 
@@ -71,6 +71,39 @@ class CommentController {
             }
             $this->return("Update/updateCommentView", "Forum : Modifier un commentaire");
         }
+    }
+
+    /**
+     * Archive a comment
+     * @param $comment
+     */
+    public function archive($comment) {
+        if (isset($_SESSION['id'])) {
+            if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
+                $subjectManager = new SubjectManager();
+                $commentManager = new CommentManager();
+                $userManager = new UserManager();
+                $categorieManager = new CategorieManager();
+
+                $id = intval($comment['id']);
+                $categorie_fk = intval($comment['categorie_fk']);
+                $id2 = $categorie_fk;
+                $subject_fk = intval($comment['subject_fk']);
+                $id1 = $subject_fk;
+                $user_fk = intval($comment['user_fk']);
+
+                $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                $subject_fk = $subjectManager->getSubject($subject_fk);
+                $user_fk = $userManager->getUser($user_fk);
+                if ($user_fk->getId()) {
+                    // 1 means the category is archived.
+                    $comment = new Comment($id, '', '', $categorie_fk, $subject_fk, $user_fk, 1 );
+                    $commentManager->archive($comment);
+                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=4");
+                }
+            }
+        }
+        $this->return("Archive/archiveCommentView", "Forum : Archiver un commentaire");
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
-namespace Chloe\Forum\Comment;
+namespace Forum\Comment;
 
-use Chloe\Forum\DB;
-use Chloe\Forum\Entity\Comment;
-use Chloe\Forum\Categorie\CategorieManager;
-use Chloe\Forum\User\UserManager;
-use Chloe\Forum\Subject\SubjectManager;
-use Chloe\Forum\Manager\Traits\ManagerTrait;
+use Forum\DB;
+use Forum\Entity\Comment;
+use Forum\Categorie\CategorieManager;
+use Forum\User\UserManager;
+use Forum\Subject\SubjectManager;
+use Forum\Manager\Traits\ManagerTrait;
 
 class CommentManager {
 
@@ -123,6 +123,20 @@ class CommentManager {
         $request->bindValue(':id', $comment->getId());
         $request->bindValue(':date', $comment->getDate());
         $request->bindValue(':comment', $comment->getComment());
+
+        return $request->execute();
+    }
+
+    /**
+     * Archive a comment
+     * @param Comment $comment
+     * @return bool
+     */
+    public function archive (Comment $comment): bool {
+        $request = DB::getInstance()->prepare("UPDATE comment SET archive = :archive WHERE id = :id");
+
+        $request->bindValue(":id", $comment->getId());
+        $request->bindValue(":archive", $comment->setArchive($comment->getArchive()));
 
         return $request->execute();
     }

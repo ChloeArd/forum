@@ -1,7 +1,7 @@
 <?php
-use Chloe\Forum\DB;
+use Forum\DB;
 
-require "../../source/Model/DB.php";
+require "../../Model/DB.php";
 
 if (isset($_POST["pseudo"], $_POST["password"])) {
     $bdd = DB::getInstance();

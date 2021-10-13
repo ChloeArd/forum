@@ -14,6 +14,12 @@ if (isset($_GET['success'])) {
         case '2' :
             $return = "Le commentaire a bien été supprimé !";
             break;
+        case '3' :
+            $return = "Ce sujet est bien archivé !";
+            break;
+        case '4' :
+            $return = "Un commentaire est bien archivé !";
+            break;
     }
 }
 ?>
@@ -35,7 +41,7 @@ if (isset($_GET['success'])) {
             if (isset($_SESSION['id'])) {
 
                 // Admin and moderator can edit and the user who created the topic too
-                if ($_SESSION['role_fk'] === "3" && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
+                if ($_SESSION['role_fk'] !== "2" && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
                     || $subject->getUserFk()->getId() == $_SESSION['id'] && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
                     || $subject->getCategorieFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
                     || $subject->getArchive() === 1 && $_SESSION ['role_fk'] == "1") { ?>
@@ -92,10 +98,12 @@ if (isset($_GET['success'])) {
                     <?php
                     if (isset($_SESSION['id'])) {
                         // Admin and moderator can edit and the user who created the topic too
-                        if ($_SESSION['role_fk'] === "3" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1
-                            || $comment->getUserFk()->getId() == $_SESSION['id'] && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubject()->getArchive() !== 1
+                        if ($_SESSION['role_fk'] !== "2" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1 && $comment->getArchive() !== 1
+                            || $comment->getUserFk()->getId() == $_SESSION['id'] && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1 && $comment->getArchive() !== 1
                             || $comment->getCategorieFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
-                            || $comment->getSubjectFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1") { ?>                            <a href="../index.php?controller=comments&action=update&id=<?=$comment->getId()?>" class="button3"><i class="fas fa-edit"></i></a>
+                            || $comment->getSubjectFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
+                            || $comment->getArchive() === 1 && $_SESSION ['role_fk'] == "1") { ?>
+                            <a href="../index.php?controller=comments&action=update&id=<?=$comment->getId()?>" class="button3"><i class="fas fa-edit"></i></a>
                         <?php
                         }
                         // That the admin who can delete
@@ -104,13 +112,19 @@ if (isset($_GET['success'])) {
                         <?php
                         }
                         // That the admin and the moderator who can archive
-                        if ($_SESSION['role_fk'] !== "2" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1) { ?>
-                            <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
+                        if ($_SESSION['role_fk'] !== "2" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1 && $comment->getArchive() !== 1) { ?>
+                            <a href="../index.php?controller=comments&action=archive&id=<?=$comment->getId()?>" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
                         <?php
                         }
                     }?>
                 </div>
                 <div class="comment">
+                    <?php
+                    if ($comment->getArchive() === 1) { ?>
+                        <p class="red">(Archivé)</p>
+                    <?php
+                    }
+                    ?>
                     <p><?=$comment->getComment()?></p>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chloe\Forum\Controller\Traits;
+namespace Forum\Controller\Traits;
 
 trait ReturnViewTrait {
 

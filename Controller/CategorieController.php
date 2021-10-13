@@ -1,11 +1,11 @@
 <?php
 
-namespace Chloe\Forum\Controller;
+namespace Forum\Controller;
 
-use Chloe\Forum\Controller\Traits\ReturnViewTrait;
-use Chloe\Forum\Categorie\CategorieManager;
-use Chloe\Forum\Entity\Categorie;
-use Chloe\Forum\User\UserManager;
+use Forum\Controller\Traits\ReturnViewTrait;
+use Forum\Categorie\CategorieManager;
+use Forum\Entity\Categorie;
+use Forum\User\UserManager;
 
 class CategorieController {
 
@@ -100,14 +100,14 @@ class CategorieController {
                 $userManager = new UserManager();
 
                 $id = intval($categorie['id']);
-                $user_fk = $categorie['user_fk'];
+                $user_fk = intval($categorie['user_fk']);
 
                 $user_fk = $userManager->getUser($user_fk);
                 if ($user_fk->getId()) {
                     // 1 means the category is archived.
                     $categorie = new Categorie($id, '', '', '', $user_fk, 1 );
                     $categorieManager->archive($categorie);
-                    header("Location: ../index.php?success=3");
+                    header("Location: ../index.php?controller=subjects&action=view&id=$id&success=3");
                 }
             }
         }

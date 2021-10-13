@@ -14,6 +14,9 @@ if (isset($_GET['success'])) {
         case '2':
             $return = "Vous avez bien supprimé un sujet !";
             break;
+        case '3':
+            $return = "Vous avez bien archivé cette catégorie !";
+            break;
     }
 }
 ?>

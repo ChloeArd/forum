@@ -1,9 +1,9 @@
 <?php
-namespace Chloe\Forum\Role;
+namespace Forum\Role;
 
-use Chloe\Forum\DB;
-use Chloe\Forum\Entity\Role;
-use Chloe\Forum\Manager\Traits\ManagerTrait;
+use Forum\DB;
+use Forum\Entity\Role;
+use Forum\Manager\Traits\ManagerTrait;
 
 require_once "Model/Manager/Traits/ManagerTrait.php";
 
