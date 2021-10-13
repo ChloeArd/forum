@@ -23,6 +23,9 @@ if (isset($_GET['success'])) {
         case '5' :
             $return = "Vous avez bien supprimé votre compte";
             break;
+        case '6' :
+            $return = "Votre catégorie est bien archivé / clôturé";
+            break;
     }
 }
 ?>

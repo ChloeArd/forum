@@ -120,6 +120,7 @@ footer {
 .modal2, #closeModal {
     position: absolute;
     z-index: 20;
+    display: none;
 }
 
 #closeModal {
@@ -129,7 +130,6 @@ footer {
     padding: 6px;
     font-size: 15px;
     border: none;
-    display: none;
 }
 
 #success {

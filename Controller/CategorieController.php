@@ -60,11 +60,11 @@ class CategorieController {
     public function update($categorie) {
         if (isset($_SESSION["id"])) {
             if ($_SESSION['role_fk'] === "1") {
-                $id = intval($categorie['id']);
                 if (isset($categorie['id'], $categorie['title'], $categorie['description'], $categorie['picture'], $categorie['user_fk'])) {
                     $userManager = new UserManager();
                     $categorieManager = new CategorieManager();
 
+                    $id = intval($categorie['id']);
                     $title = htmlentities(trim(ucfirst($categorie['title'])));
                     $description = htmlentities(trim(ucfirst($categorie['description'])));
                     $picture = trim($categorie['picture']);
@@ -88,12 +88,30 @@ class CategorieController {
                         header("Location: ../index.php?controller=categories&action=update&id=$id&error=0");
                     }
                 }
-                else {
-                    header("Location: ../index.php?controller=categories&action=update&id=$id&error=2");
-                }
             }
             $this->return("Update/updateCategorieView", "Forum : Modifier une catégorie");
         }
+    }
+
+    public function archive($categorie) {
+        if (isset($_SESSION['id'])) {
+            if (isset($categorie['id'], $categorie['user_fk'])) {
+                $categorieManager = new CategorieManager();
+                $userManager = new UserManager();
+
+                $id = intval($categorie['id']);
+                $user_fk = $categorie['user_fk'];
+
+                $user_fk = $userManager->getUser($user_fk);
+                if ($user_fk->getId()) {
+                    // 1 means the category is archived.
+                    $categorie = new Categorie($id, '', '', '', $user_fk, 1 );
+                    $categorieManager->archive($categorie);
+                    header("Location: ../index.php?success=3");
+                }
+            }
+        }
+        $this->return("Archive/archiveCategorieView", "Forum : Archiver une catégorie");
     }
 
     /**

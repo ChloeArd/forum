@@ -43,6 +43,7 @@ class CommentManager {
             $comment->setSubjectFk($subject);
             $user = $this->userManager->getUser(['user_fk']);
             $comment->setUserFk($user);
+            $comment->setArchive($data['archive']);
         }
         return $comment;
     }
@@ -62,7 +63,7 @@ class CommentManager {
                 $subject = SubjectManager::getManager()->getSubject($info['subject_fk']);
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $comment[] = new Comment($info['id'], $info['date'], $info['comment'],$categorie, $subject, $user);
+                    $comment[] = new Comment($info['id'], $info['date'], $info['comment'],$categorie, $subject, $user, $info['archive']);
                 }
             }
         }
@@ -84,7 +85,7 @@ class CommentManager {
                 $subject = SubjectManager::getManager()->getSubject($info['subject_fk']);
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $comment[] = new Comment($info['id'], $info['date'], $info['comment'],$categorie, $subject, $user);
+                    $comment[] = new Comment($info['id'], $info['date'], $info['comment'],$categorie, $subject, $user, $info['archive']);
                 }
             }
         }

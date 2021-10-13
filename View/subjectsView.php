@@ -24,15 +24,21 @@ if (isset($_GET['success'])) {
     <?php
     if (isset($var['categorie'])) {
         foreach ($var['categorie'] as $categorie) {?>
+            <?php
+            if ($categorie->getArchive() === 1) {?>
+                <p class="center backgroundRed marg20 white">(Archivé)</p>
+                <?php
+            }
+            ?>
             <h1 class="center"><?=$categorie->getTitle()?></h1>
             <?php
             if (isset($_SESSION['id'])) {
-                if ($_SESSION['role_fk'] === "1") { ?>
+                if ($_SESSION['role_fk'] === "1") {?>
                     <div class="height">
                         <a href="../index.php?controller=categories&action=update&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
                     </div>
                     <div class="height">
-                        <a href="#" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
+                        <a href="../index.php?controller=categories&action=archive&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
                     </div>
                     <div class="height">
                         <a href="../index.php?controller=categories&action=delete&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
@@ -46,11 +52,13 @@ if (isset($_GET['success'])) {
             </div>
 
             <?php
-            if (isset($_SESSION['id'])) {?>
-                <div class="height">
-                    <a href="../index.php?controller=subjects&action=new&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
-                </div>
+            if (isset($_SESSION['id'])) {
+                if ($categorie->getArchive() !== 1) {?>
+                    <div class="height">
+                        <a href="../index.php?controller=subjects&action=new&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un sujet</a>
+                    </div>
                 <?php
+                }
             }
         }
     }?>

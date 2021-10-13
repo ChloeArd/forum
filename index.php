@@ -41,6 +41,9 @@ if (isset($_GET['controller'])) {
                     case 'update' :
                         $controllerCategories->update($_POST);
                         break;
+                    case 'archive' :
+                        $controllerCategories->archive($_POST);
+                        break;
                     case 'delete' :
                         $controllerCategories->delete($_POST);
                         break;
@@ -62,6 +65,9 @@ if (isset($_GET['controller'])) {
                         break;
                     case 'update' :
                         $controllerSubjects->update($_POST);
+                        break;
+                    case 'archive' :
+                        $controllerSubjects->archive($_POST);
                         break;
                     case 'delete' :
                         $controllerSubjects->delete($_POST);

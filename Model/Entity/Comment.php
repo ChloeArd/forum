@@ -12,6 +12,7 @@ class Comment {
     private ?Categorie $categorie_fk;
     private ?Subject $subject_fk;
     private ?User $user_fk;
+    private ?int $archive;
 
     /**
      * @param int|null $id
@@ -22,13 +23,14 @@ class Comment {
      * @param User|null $user_fk
      */
     public function __construct(?int $id = null, ?string $date = null, ?string $comment = null, ?Categorie $categorie_fk = null, ?Subject $subject_fk = null,
-                                ?User $user_fk = null) {
+                                ?User $user_fk = null, ?int $archive = null) {
         $this->id = $id;
         $this->date = $date;
         $this->comment = $comment;
         $this->categorie_fk = $categorie_fk;
         $this->subject_fk = $subject_fk;
         $this->user_fk = $user_fk;
+        $this->archive = $archive;
     }
 
     /**
@@ -119,5 +121,20 @@ class Comment {
     public function setUserFk(?User $user_fk): ?User {
         $this->user_fk = $user_fk;
         return $user_fk;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getArchive(): ?int {
+        return $this->archive;
+    }
+
+    /**
+     * @param int|null $archive
+     */
+    public function setArchive(?int $archive): ?int {
+        $this->archive = $archive;
+        return $archive;
     }
 }

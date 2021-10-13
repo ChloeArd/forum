@@ -12,6 +12,7 @@ class Subject {
     private ?string $picture;
     private ?Categorie $categorie_fk;
     private ?User $user_fk;
+    private ?int $archive;
 
     /**
      * @param int|null $id
@@ -24,7 +25,8 @@ class Subject {
      * @param User|null $user_fk
      */
     public function __construct(?int $id = null, ?string $title = null, ?string $description = null, ?string $date = null,
-                                ?string $text = null, ?string $picture = null, ?Categorie $categorie_fk = null, ?User $user_fk = null) {
+                                ?string $text = null, ?string $picture = null, ?Categorie $categorie_fk = null, ?User $user_fk = null,
+                                ?int $archive = null) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
@@ -33,6 +35,7 @@ class Subject {
         $this->picture = $picture;
         $this->categorie_fk = $categorie_fk;
         $this->user_fk = $user_fk;
+        $this->archive = $archive;
     }
 
     /**
@@ -153,5 +156,20 @@ class Subject {
     public function setUserFk(?User $user_fk): ?User {
         $this->user_fk = $user_fk;
         return $user_fk;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getArchive(): ?int {
+        return $this->archive;
+    }
+
+    /**
+     * @param int|null $archive
+     */
+    public function setArchive(?int $archive): ?int {
+        $this->archive = $archive;
+        return $archive;
     }
 }

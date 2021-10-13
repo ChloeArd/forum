@@ -41,6 +41,7 @@ class SubjectManager {
             $subject->setCategorieFk($categorie);
             $user = $this->userManager->getUser(['user_fk']);
             $subject->setUserFk($user);
+            $subject->setArchive($data['archive']);
         }
         return $subject;
     }
@@ -61,7 +62,7 @@ class SubjectManager {
                 $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user);
+                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user, $info['archive']);
                 }
             }
         }
@@ -82,7 +83,7 @@ class SubjectManager {
                 $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user);
+                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user, $info['archive']);
                 }
             }
         }
@@ -103,7 +104,7 @@ class SubjectManager {
                 $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user);
+                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user, $info['archive']);
                 }
             }
         }
@@ -124,7 +125,7 @@ class SubjectManager {
                 $categorie = CategorieManager::getManager()->getCategorie($categorie_fk);
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user);
+                    $subject[] = new Subject($info['id'], $info['title'], $info['description'], $info['date'], $info['text'], $info['picture'], $categorie, $user, $info['archive']);
                 }
             }
         }
@@ -168,6 +169,20 @@ class SubjectManager {
         $request->bindValue(':date', $subject->getDate());
         $request->bindValue(':text', $subject->getText());
         $request->bindValue(':picture', $subject->getPicture());
+
+        return $request->execute();
+    }
+
+    /**
+     * Archive a subject
+     * @param Subject $subject
+     * @return bool
+     */
+    public function archive (Subject $subject): bool {
+        $request = DB::getInstance()->prepare("UPDATE subject SET archive = :archive WHERE id = :id");
+
+        $request->bindValue(":id", $subject->getId());
+        $request->bindValue(":archive", $subject->setArchive($subject->getArchive()));
 
         return $request->execute();
     }

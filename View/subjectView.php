@@ -23,21 +23,31 @@ if (isset($_GET['success'])) {
     <?php
     if (isset($var['subject'])) {
         foreach ($var['subject'] as $subject) { ?>
+            <?php
+            if ($subject->getArchive() === 1 || $subject->getCategorieFk()->getArchive() === 1) {?>
+                <p class="center backgroundRed marg20 white">(Archivé)</p>
+                <?php
+            }
+            ?>
             <h1 class="center"><?=$subject->getTitle()?></h1>
             <p class="center gray">Par <?=$subject->getUserFk()->getPseudo()?></p>
             <?php
             if (isset($_SESSION['id'])) {
+
                 // Admin and moderator can edit and the user who created the topic too
-                if ($_SESSION['role_fk'] !== "2" || $subject->getUserFk()->getId() == $_SESSION['id']) { ?>
+                if ($_SESSION['role_fk'] === "3" && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
+                    || $subject->getUserFk()->getId() == $_SESSION['id'] && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
+                    || $subject->getCategorieFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
+                    || $subject->getArchive() === 1 && $_SESSION ['role_fk'] == "1") { ?>
                     <div class="height">
                         <a href="../index.php?controller=subjects&action=update&id=<?=$subject->getId()?>&id2=<?=$subject->getCategorieFk()->getId()?>" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
                     </div>
                 <?php
                 }
                 // That the admin and the moderator who can archive
-                if ($_SESSION['role_fk'] !== "2") { ?>
+                if ($_SESSION['role_fk'] !== "2" && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1) { ?>
                     <div class="height">
-                        <a href="#" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
+                        <a href="../index.php?controller=subjects&action=archive&id=<?=$subject->getId()?>" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
                     </div>
                 <?php
                 }
@@ -60,11 +70,13 @@ if (isset($_GET['success'])) {
             <div class="flexRow flexCenter">
                 <h2 class="gray">Commentaires</h2>
                 <?php
-                if (isset($_SESSION['id'])) {?>
+                if (isset($_SESSION['id'])) {
+                    if ($subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1) {?>
                     <a href="../index.php?controller=comments&action=new&id=<?=$_SESSION['id']?>&id2=<?=$subject->getId()?>&id3=<?=$subject->getCategorieFk()->getId()?>" id="buttonAdCom" class="button buttonAbsolute1"><i class="fas fa-plus"></i> Ajouter un commentaire</a>
                     <?php
+                    }
                 }
-                    ?>
+                ?>
             </div>
         <?php
         }
@@ -80,8 +92,10 @@ if (isset($_GET['success'])) {
                     <?php
                     if (isset($_SESSION['id'])) {
                         // Admin and moderator can edit and the user who created the topic too
-                        if ($_SESSION['role_fk'] !== "2" || $comment->getUserFk()->getId() == $_SESSION['id']) { ?>
-                            <a href="../index.php?controller=comments&action=update&id=<?=$comment->getId()?>" class="button3"><i class="fas fa-edit"></i></a>
+                        if ($_SESSION['role_fk'] === "3" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1
+                            || $comment->getUserFk()->getId() == $_SESSION['id'] && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubject()->getArchive() !== 1
+                            || $comment->getCategorieFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
+                            || $comment->getSubjectFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1") { ?>                            <a href="../index.php?controller=comments&action=update&id=<?=$comment->getId()?>" class="button3"><i class="fas fa-edit"></i></a>
                         <?php
                         }
                         // That the admin who can delete
@@ -90,7 +104,7 @@ if (isset($_GET['success'])) {
                         <?php
                         }
                         // That the admin and the moderator who can archive
-                        if ($_SESSION['role_fk'] !== "2") { ?>
+                        if ($_SESSION['role_fk'] !== "2" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1) { ?>
                             <a href="#" class="button3 buttonPos4"><i class="fas fa-archive"></i></a>
                         <?php
                         }

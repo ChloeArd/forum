@@ -35,6 +35,7 @@ class CategorieManager {
             $categorie->setPicture($data['picture']);
             $user = $this->userManager->getUser(['user_fk']);
             $categorie->setUserFk($user);
+            $categorie->setArchive($data['archive']);
         }
         return $categorie;
     }
@@ -50,7 +51,7 @@ class CategorieManager {
             foreach ($request->fetchAll() as $info) {
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $categorie[] = new Categorie($info['id'], $info['title'], $info['description'], $info['picture'],$user);
+                    $categorie[] = new Categorie($info['id'], $info['title'], $info['description'], $info['picture'],$user, $info['archive']);
                 }
             }
         }
@@ -69,7 +70,7 @@ class CategorieManager {
             foreach ($request->fetchAll() as $info) {
                 $user = UserManager::getManager()->getUser($info['user_fk']);
                 if($user->getId()) {
-                    $categorie[] = new Categorie($info['id'], $info['title'], $info['description'], $info['picture'],$user);
+                    $categorie[] = new Categorie($info['id'], $info['title'], $info['description'], $info['picture'],$user, $info['archive']);
                 }
             }
         }
@@ -107,6 +108,20 @@ class CategorieManager {
         $request->bindValue(':title', $categorie->setTitle($categorie->getTitle()));
         $request->bindValue(':description', $categorie->setDescription($categorie->getDescription()));
         $request->bindValue(':picture', $categorie->setPicture($categorie->getPicture()));
+
+        return $request->execute();
+    }
+
+    /**
+     * Archive a categorie
+     * @param Categorie $categorie
+     * @return bool
+     */
+    public function archive (Categorie $categorie): bool {
+        $request = DB::getInstance()->prepare("UPDATE categorie SET archive = :archive WHERE id = :id");
+
+        $request->bindValue(":id", $categorie->getId());
+        $request->bindValue(":archive", $categorie->setArchive($categorie->getArchive()));
 
         return $request->execute();
     }

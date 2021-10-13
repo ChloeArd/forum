@@ -129,6 +129,34 @@ class SubjectController {
     }
 
     /**
+     * Archive a subject
+     * @param $subject
+     */
+    public function archive($subject) {
+        if (isset($_SESSION['id'])) {
+            if (isset($subject['id'], $subject['categorie_fk'], $subject['user_fk'])) {
+                $subjectManager = new SubjectManager();
+                $userManager = new UserManager();
+                $categorieManager = new CategorieManager();
+
+                $id = intval($subject['id']);
+                $categorie_fk = $subject['categorie_fk'];
+                $user_fk = $subject['user_fk'];
+
+                $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                $user_fk = $userManager->getUser($user_fk);
+                if ($user_fk->getId()) {
+                    // 1 means the category is archived.
+                    $subject = new Subject($id, '', '', '', '','', $categorie_fk, $user_fk, 1 );
+                    $subjectManager->archive($subject);
+                    header("Location: ../index.php?success=3");
+                }
+            }
+        }
+        $this->return("Archive/archiveSubjectView", "Forum : Archiver un sujet");
+    }
+
+    /**
      * delete a subject
      * @param $subject
      */

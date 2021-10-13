@@ -9,6 +9,7 @@ class Categorie {
     private ?string $description;
     private ?string $picture;
     private ?User $user_fk;
+    private ?int $archive;
 
     /**
      * @param int|null $id
@@ -18,12 +19,13 @@ class Categorie {
      * @param User|null $user_fk
      */
     public function __construct(?int $id = null, ?string $title = null, ?string $description = null, ?string $picture = null,
-                                ?User $user_fk = null) {
+                                ?User $user_fk = null, ?int $archive = null) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->picture = $picture;
         $this->user_fk = $user_fk;
+        $this->archive = $archive;
     }
 
     /**
@@ -100,4 +102,20 @@ class Categorie {
         $this->user_fk = $user_fk;
         return $user_fk;
     }
+
+    /**
+     * @return int|null
+     */
+    public function getArchive(): ?int {
+        return $this->archive;
+    }
+
+    /**
+     * @param int|null $archive
+     */
+    public function setArchive(?int $archive): ?int {
+        $this->archive = $archive;
+        return $archive;
+    }
+
 }
