@@ -94,7 +94,7 @@ if (isset($_GET['success'])) {
         foreach ($var['comments'] as $comment) { ?>
             <div class="comments flexColumn">
                 <div class="pseudo gray flexRow align">
-                    <p><?=$comment->getUserFk()->getPseudo()?> / <?=$comment->getDate()?></p>
+                    <p class="comPseudo"><?=$comment->getUserFk()->getPseudo()?> / <?=$comment->getDate()?></p>
                     <?php
                     if (isset($_SESSION['id'])) {
                         // Admin and moderator can edit and the user who created the topic too

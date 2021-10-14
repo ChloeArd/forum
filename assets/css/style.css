@@ -401,6 +401,9 @@ textarea {
     #buttonAdCom {
         margin-top: -70px;
     }
+    .imageUpdate {
+        width: 40%;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -436,9 +439,23 @@ textarea {
     }
 }
 
+@media screen and (max-width: 600px) {
+    .imageCategorie {
+        width: 90%;
+    }
+}
 
 @media screen and (max-width: 500px) {
     .categories {
         width: 80%;
+    }
+    .imageUpdate {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .comPseudo {
+        font-size: 12px;
     }
 }

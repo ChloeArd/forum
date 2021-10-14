@@ -24,6 +24,12 @@
                                 <img class="imageHome" src="<?=$subject->getPicture()?>">
                                 <p class="size20 center"><?=$subject->getTitle()?></p>
                                 <p class="margTop15 center">Catégorie : <?=$subject->getCategorieFk()->getTitle()?></p>
+                                <?php
+                                if ($subject->getArchive() === 1 || $subject->getCategorieFk()->getArchive() === 1) { ?>
+                                    <p class="red">(Archivé)</p>
+                                    <?php
+                                }
+                                ?>
                             </a>
                         <?php
                         }

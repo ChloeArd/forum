@@ -55,9 +55,9 @@ class SubjectController {
                 $date = $subject['date'];
                 $text = htmlentities(trim(ucfirst($subject['text'])));
                 $picture = trim($subject['picture']);
-                $categorie_fk = $subject['categorie_fk'];
+                $categorie_fk = intval($subject['categorie_fk']);
                 $id = $subject['categorie_fk'];
-                $user_fk = $subject['user_fk'];
+                $user_fk = intval($subject['user_fk']);
 
                 // the title size must be less than or equal to 40
                 if (strlen($title) <= 40) {
@@ -72,11 +72,11 @@ class SubjectController {
                         }
                     }
                     else {
-                        header("Location: ../index.php?controller=subjects&action=new&error=1");
+                        header("Location: ../index.php?controller=subjects&action=new&id=$categorie_fk&error=1");
                     }
                 }
                 else {
-                    header("Location: ../index.php?controller=subjects&action=new&error=0");
+                    header("Location: ../index.php?controller=subjects&action=new&id=$categorie_fk&error=0");
                 }
             }
             $this->return("Create/createSubjectView", "Forum : Créer un sujet");
@@ -100,9 +100,9 @@ class SubjectController {
                 $date = $subject['date'];
                 $text = htmlentities(trim(ucfirst($subject['text'])));
                 $picture = trim($subject['picture']);
-                $categorie_fk = $subject['categorie_fk'];
+                $categorie_fk = intval($subject['categorie_fk']);
                 $id2 = $subject['categorie_fk'];
-                $user_fk = $subject['user_fk'];
+                $user_fk = intval($subject['user_fk']);
 
                 // the title size must be less than or equal to 40
                 if (strlen($title) <= 40) {
@@ -134,23 +134,25 @@ class SubjectController {
      */
     public function archive($subject) {
         if (isset($_SESSION['id'])) {
-            if (isset($subject['id'], $subject['categorie_fk'], $subject['user_fk'])) {
-                $subjectManager = new SubjectManager();
-                $userManager = new UserManager();
-                $categorieManager = new CategorieManager();
+            if ($_SESSION['role_fk'] !== "2") {
+                if (isset($subject['id'], $subject['categorie_fk'], $subject['user_fk'])) {
+                    $subjectManager = new SubjectManager();
+                    $userManager = new UserManager();
+                    $categorieManager = new CategorieManager();
 
-                $id = intval($subject['id']);
-                $categorie_fk = intval($subject['categorie_fk']);
-                $id2 = $categorie_fk;
-                $user_fk = intval($subject['user_fk']);
+                    $id = intval($subject['id']);
+                    $categorie_fk = intval($subject['categorie_fk']);
+                    $id2 = $categorie_fk;
+                    $user_fk = intval($subject['user_fk']);
 
-                $categorie_fk = $categorieManager->getCategorie($categorie_fk);
-                $user_fk = $userManager->getUser($user_fk);
-                if ($user_fk->getId()) {
-                    // 1 means the category is archived.
-                    $subject = new Subject($id, '', '', '', '','', $categorie_fk, $user_fk, 1 );
-                    $subjectManager->archive($subject);
-                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=3");
+                    $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                    $user_fk = $userManager->getUser($user_fk);
+                    if ($user_fk->getId()) {
+                        // 1 means the category is archived.
+                        $subject = new Subject($id, '', '', '', '', '', $categorie_fk, $user_fk, 1);
+                        $subjectManager->archive($subject);
+                        header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id&id2=$id2&success=3");
+                    }
                 }
             }
         }

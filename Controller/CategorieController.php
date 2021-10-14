@@ -6,6 +6,7 @@ use Forum\Controller\Traits\ReturnViewTrait;
 use Forum\Categorie\CategorieManager;
 use Forum\Entity\Categorie;
 use Forum\User\UserManager;
+use phpDocumentor\Reflection\Types\Integer;
 
 class CategorieController {
 
@@ -25,7 +26,7 @@ class CategorieController {
                     $title = htmlentities(trim(ucfirst($categorie['title'])));
                     $description = htmlentities(trim(ucfirst($categorie['description'])));
                     $picture = trim($categorie['picture']);
-                    $user_fk = $categorie['user_fk'];
+                    $user_fk = intval($categorie['user_fk']);
 
                     // the title size must be less than or equal to 20
                     if (strlen($title) <= 20) {
@@ -44,9 +45,6 @@ class CategorieController {
                     else {
                         header("Location: ../index.php?controller=categories&action=new&error=0");
                     }
-                }
-                else {
-                    header("Location: ../index.php?controller=categories&action=new&error=2");
                 }
             }
             $this->return("Create/createCategorieView", "Forum : Créer une catégorie");
@@ -68,7 +66,7 @@ class CategorieController {
                     $title = htmlentities(trim(ucfirst($categorie['title'])));
                     $description = htmlentities(trim(ucfirst($categorie['description'])));
                     $picture = trim($categorie['picture']);
-                    $user_fk = $categorie['user_fk'];
+                    $user_fk = intval($categorie['user_fk']);
 
                     // the title size must be less than or equal to 20
                     if (strlen($title) <= 20) {
@@ -95,19 +93,21 @@ class CategorieController {
 
     public function archive($categorie) {
         if (isset($_SESSION['id'])) {
-            if (isset($categorie['id'], $categorie['user_fk'])) {
-                $categorieManager = new CategorieManager();
-                $userManager = new UserManager();
+            if ($_SESSION['role_fk'] === "1") {
+                if (isset($categorie['id'], $categorie['user_fk'])) {
+                    $categorieManager = new CategorieManager();
+                    $userManager = new UserManager();
 
-                $id = intval($categorie['id']);
-                $user_fk = intval($categorie['user_fk']);
+                    $id = intval($categorie['id']);
+                    $user_fk = intval($categorie['user_fk']);
 
-                $user_fk = $userManager->getUser($user_fk);
-                if ($user_fk->getId()) {
-                    // 1 means the category is archived.
-                    $categorie = new Categorie($id, '', '', '', $user_fk, 1 );
-                    $categorieManager->archive($categorie);
-                    header("Location: ../index.php?controller=subjects&action=view&id=$id&success=3");
+                    $user_fk = $userManager->getUser($user_fk);
+                    if ($user_fk->getId()) {
+                        // 1 means the category is archived.
+                        $categorie = new Categorie($id, '', '', '', $user_fk, 1);
+                        $categorieManager->archive($categorie);
+                        header("Location: ../index.php?controller=subjects&action=view&id=$id&success=3");
+                    }
                 }
             }
         }

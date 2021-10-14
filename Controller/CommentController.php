@@ -79,27 +79,29 @@ class CommentController {
      */
     public function archive($comment) {
         if (isset($_SESSION['id'])) {
-            if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
-                $subjectManager = new SubjectManager();
-                $commentManager = new CommentManager();
-                $userManager = new UserManager();
-                $categorieManager = new CategorieManager();
+            if ($_SESSION['role_fk'] !== "2") {
+                if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
+                    $subjectManager = new SubjectManager();
+                    $commentManager = new CommentManager();
+                    $userManager = new UserManager();
+                    $categorieManager = new CategorieManager();
 
-                $id = intval($comment['id']);
-                $categorie_fk = intval($comment['categorie_fk']);
-                $id2 = $categorie_fk;
-                $subject_fk = intval($comment['subject_fk']);
-                $id1 = $subject_fk;
-                $user_fk = intval($comment['user_fk']);
+                    $id = intval($comment['id']);
+                    $categorie_fk = intval($comment['categorie_fk']);
+                    $id2 = $categorie_fk;
+                    $subject_fk = intval($comment['subject_fk']);
+                    $id1 = $subject_fk;
+                    $user_fk = intval($comment['user_fk']);
 
-                $categorie_fk = $categorieManager->getCategorie($categorie_fk);
-                $subject_fk = $subjectManager->getSubject($subject_fk);
-                $user_fk = $userManager->getUser($user_fk);
-                if ($user_fk->getId()) {
-                    // 1 means the category is archived.
-                    $comment = new Comment($id, '', '', $categorie_fk, $subject_fk, $user_fk, 1 );
-                    $commentManager->archive($comment);
-                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=4");
+                    $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                    $subject_fk = $subjectManager->getSubject($subject_fk);
+                    $user_fk = $userManager->getUser($user_fk);
+                    if ($user_fk->getId()) {
+                        // 1 means the category is archived.
+                        $comment = new Comment($id, '', '', $categorie_fk, $subject_fk, $user_fk, 1);
+                        $commentManager->archive($comment);
+                        header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=4");
+                    }
                 }
             }
         }
@@ -123,5 +125,4 @@ class CommentController {
             $this->return('delete/deleteCommentView', "Forum : Supprimer un commentaire");
         }
     }
-
 }

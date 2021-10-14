@@ -22,8 +22,8 @@ function closeModal (idModal) {
 let span = document.getElementsByClassName("title");
 if (span) {
     letterColorAndFont();
-    setTimeout(letterColorAndFont2, 10000);
-    setTimeout(letterColorAndFont, 20000);
+    setInterval(letterColorAndFont2, 10000);
+    setInterval(letterColorAndFont, 20000);
 
     function letterColorAndFont () {
         let time = 500;
@@ -35,7 +35,6 @@ if (span) {
                 span[x].style.fontSize = "50px";
             }, time);
             time = time + 800;
-            console.log(span[x]);
         }
     }
 
@@ -49,7 +48,6 @@ if (span) {
                 span[x].style.fontSize = "35px";
             }, time);
             time = time + 800;
-            console.log(span[x]);
         }
     }
 }

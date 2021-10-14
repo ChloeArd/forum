@@ -93,11 +93,11 @@ if (isset($_GET['success'])) {
                     <div class="width60 flexCenter wrap">
                         <p><?=$subject->getDescription() ?></p>
                     </div>
-                    <div class="width20 flexCenter">
+                    <div class="width20 flexCenter flexColumn">
                         <p><?=$subject->getDate()?></p>
                         <?php
                         if ($subject->getArchive() === 1 || $subject->getCategorieFk()->getArchive() === 1) { ?>
-                            <p class="red margL">(Archivé)</p>
+                            <p class="red">(Archivé)</p>
                             <?php
                         }
                         ?>
