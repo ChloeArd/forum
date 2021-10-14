@@ -17,6 +17,7 @@ if (isset($_POST["pseudo"], $_POST["password"])) {
     $user = $stmt->fetch();
     // I check that the password encrypted on my database that I retrieved using the '$ user [' password ']' loop corresponds to the password entered by the user
     if (password_verify($password, $user['password'])) {
+        // check if the account is confirmed
         if ($user['confirme'] == 1) {
             // If the 2 password correspond then we open the session and we store the user's data in a session.
             session_start();

@@ -2,6 +2,14 @@
 $return = "";
 $id = "";
 
+if (isset($_GET['success'])) {
+    $id = "success";
+    switch ($_GET['success']) {
+        case '0':
+            $return = "Vous êtes incrits, veuillez confirmé votre compte en cliquant sur le lien envoyé par mail !";
+            break;
+    }
+}
 if (isset($_GET['error'])) {
     $id = "error";
     switch ($_GET['error']) {

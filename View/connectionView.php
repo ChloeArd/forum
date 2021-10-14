@@ -6,7 +6,7 @@ if (isset($_GET['success'])) {
     $id = "success";
     switch ($_GET['success']) {
         case '0':
-            $return = "Vous êtes incrits !";
+            $return = "Votre compte est confirmé !";
             break;
     }
 }

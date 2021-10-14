@@ -1,6 +1,6 @@
 <?php
 use Forum\DB;
-require "../../Model/DB.php";
+require_once "../../Model/DB.php";
 
 if (isset($_GET['pseudo'], $_GET['key'])) {
     $bdd = DB::getInstance();
@@ -18,6 +18,7 @@ if (isset($_GET['pseudo'], $_GET['key'])) {
     // if the user exists
     if ($existe == 1) {
         $user = $requete->fetch();
+        // If the account is not confirmed, it is confirmed by inserting 1
         if ($user['confirme'] != 1) {
             $update = $bdd->prepare("UPDATE user SET confirme = :confirme WHERE pseudo = :pseudo AND confirmkey = :confirmkey");
             $update->bindValue(":confirme", 1);
@@ -25,7 +26,8 @@ if (isset($_GET['pseudo'], $_GET['key'])) {
             $update->bindValue(":confirmkey", $key);
             $update->execute();
 
-            echo "Votre compte a bien été confirmé !";
+            echo "Votre compte a bien été confirmé ! <br>
+                  <a href='../../index.php?controller=home&page=connection&success=0'>Me connecter</a>";
         }
         else {
             echo "Votre compte a déjà été confirmé !";

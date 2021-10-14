@@ -39,10 +39,10 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
             if ($password === $passwordR) {
                 // Checks if the password contains upper case, lower case, number and at least 8 characters.
                 if ($maj && $min && $number && strlen($password) >= 8) {
-
                     $lengthKey = 12;
                     $key = "";
 
+                    // Create a key
                     for ($i = 1; $i < $lengthKey; $i++) {
                         $key.= mt_rand(0,9);
                     }
@@ -58,7 +58,7 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
                     $sql->bindValue(':confirmkey', $key);
                     $sql->execute();
 
-
+                    // send a mail for confirmation
                     $pseudo = urlencode($pseudo);
                     $to = $email;
                     $subject = "Confirmation de compte.";
@@ -67,7 +67,7 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
                                 <body>
                                     <h1>Bienvenue $pseudo, sur le Forum Salmon !</h1>
                                     <br><br>
-                                    <p>Pour confirmer votre compte, cliquez sur le <a href='../../index.php?controller=home&action=confirmation&pseudo=$pseudo&key=$key?>'>lien</a>.</p>
+                                    <p>Pour confirmer votre compte, cliquez sur le <a href='http://localhost:8000/assets/php/confirmation.php?pseudo=$pseudo&key=$key?>'>lien</a>.</p>
                                 </body>
                             </html>
                             ";
@@ -79,7 +79,7 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
                     // Send account verification email
                     mail($to, $subject, $message, $headers, "-f chloe.ardoise@gmail.com");
 
-                    header("Location: ../../index.php?controller=home&page=connection&success=0");
+                    header("Location: ../../index.php?controller=home&page=registration&success=0");
                 }
                 else {
                     header("Location: ../../index.php?controller=home&page=registration&error=2");

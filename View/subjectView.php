@@ -131,5 +131,12 @@ if (isset($_GET['success'])) {
         <?php
         }
     }
+    $lengthKey = 12;
+    $key = "";
+
+    for ($i = 1; $i < $lengthKey; $i++) {
+        $key.= mt_rand(0,9);
+    }
+    echo $key;
     ?>
 </main>
