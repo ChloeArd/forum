@@ -39,29 +39,49 @@ if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwor
             if ($password === $passwordR) {
                 // Checks if the password contains upper case, lower case, number and at least 8 characters.
                 if ($maj && $min && $number && strlen($password) >= 8) {
-                    $sql = $bdd->prepare("INSERT INTO user (pseudo, email, password, role_fk) 
-                        VALUES (:pseudo, :email, :password, :role_fk)");
+
+                    $lengthKey = 12;
+                    $key = "";
+
+                    for ($i = 1; $i < $lengthKey; $i++) {
+                        $key.= mt_rand(0,9);
+                    }
+
+                    $sql = $bdd->prepare("INSERT INTO user (pseudo, email, password, role_fk, confirmkey) 
+                        VALUES (:pseudo, :email, :password, :role_fk, :confirmkey)");
 
                     $sql->bindValue(':pseudo', $pseudo);
                     $sql->bindValue(':email', $email);
                     $sql->bindValue(':password', $encryptedPassword);
                     // People who register automatically have role 2 : user.
                     $sql->bindValue(':role_fk', 2);
+                    $sql->bindValue(':confirmkey', $key);
                     $sql->execute();
 
+
+                    $pseudo = urlencode($pseudo);
                     $to = $email;
-                    $subject = "Vérification de l'adresse mail.";
+                    $subject = "Confirmation de compte.";
                     $message = "
                             <html lang='fr'>
-                                <h1>Bienvenue $pseudo, sur le Forum Salmon !</h1>
-                                <br><br>
-                                <p>Pour accéder à ton compte, clique sur le <a href='../../index.php'>lien</a> pour vérifier ton adresse mail.</p>
+                                <body>
+                                    <h1>Bienvenue $pseudo, sur le Forum Salmon !</h1>
+                                    <br><br>
+                                    <p>Pour confirmer votre compte, cliquez sur le <a href='../../index.php?controller=home&action=confirmation&pseudo=$pseudo&key=$key?>'>lien</a>.</p>
+                                </body>
                             </html>
                             ";
-
+                    $message = wordwrap($message, 70, "\r\n");
+                    $headers = [
+                        'Reply-To' => 'chloe.ardoise@gmail.com',
+                        'X-mailer' => 'PHP/' . phpversion()
+                    ];
+                    // Send account verification email
+                    mail($to, $subject, $message, $headers, "-f chloe.ardoise@gmail.com");
 
                     header("Location: ../../index.php?controller=home&page=connection&success=0");
-                } else {
+                }
+                else {
                     header("Location: ../../index.php?controller=home&page=registration&error=2");
                 }
             }

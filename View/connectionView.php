@@ -19,6 +19,9 @@ elseif (isset($_GET['error'])) {
         case '1':
             $return = "Tous les champs ne sont pas remplis !";
             break;
+        case '2':
+            $return = "Votre compte n'a pas été confirmé, veuillez vérifier votre boite mail !";
+            break;
     }
 }
 ?>

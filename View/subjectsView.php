@@ -40,9 +40,14 @@ if (isset($_GET['success'])) {
                     <div class="height">
                         <a href="../index.php?controller=categories&action=update&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-edit"></i></a>
                     </div>
-                    <div class="height">
-                        <a href="../index.php?controller=categories&action=archive&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
-                    </div>
+                    <?php
+                    if ($categorie->getArchive() !== 1) { ?>
+                        <div class="height">
+                            <a href="../index.php?controller=categories&action=archive&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-archive"></i></a>
+                        </div>
+                    <?php
+                    }
+                    ?>
                     <div class="height">
                         <a href="../index.php?controller=categories&action=delete&id=<?=$categorie->getId()?>" class="button buttonAbsolute1"><i class="fas fa-trash-alt"></i></a>
                     </div>

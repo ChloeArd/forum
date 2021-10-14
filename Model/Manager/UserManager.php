@@ -35,6 +35,8 @@ class UserManager {
             $user->setPassword(''); // We do not display the password
             $role = $this->roleManager->getRole($info['role_fk']);
             $user->setRoleFk($role);
+            $user->setConfirmkey($info['confirmkey']);
+            $user->setConfirme($info['confirme']);
         }
         return $user;
     }

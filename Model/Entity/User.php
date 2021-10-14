@@ -9,6 +9,8 @@ class User {
     private ?string $email;
     private ?string $password;
     private ?Role $role_fk;
+    private ?string $confirmkey;
+    private ?int $confirme;
 
     /**
      * @param int|null $id
@@ -18,12 +20,14 @@ class User {
      * @param Role|null $role_fk
      */
     public function __construct(?int $id = null, ?string $pseudo = null, ?string $email = null, ?string $password = null,
-                                ?Role $role_fk = null) {
+                                ?Role $role_fk = null, ?string $confirmkey = null, ?int $confirme = null) {
         $this->id = $id;
         $this->pseudo = $pseudo;
         $this->email = $email;
         $this->password = $password;
         $this->role_fk = $role_fk;
+        $this->confirmkey = $confirmkey;
+        $this->confirme = $confirme;
     }
 
     /**
@@ -99,5 +103,35 @@ class User {
     public function setRoleFk(?Role $role_fk): ?Role {
         $this->role_fk = $role_fk;
         return $role_fk;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getConfirmkey(): ?string {
+        return $this->confirmkey;
+    }
+
+    /**
+     * @param string|null $confirmkey
+     */
+    public function setConfirmkey(?string $confirmkey): ?string {
+        $this->confirmkey = $confirmkey;
+        return $confirmkey;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getConfirme(): ?int {
+        return $this->confirme;
+    }
+
+    /**
+     * @param int|null $confirme
+     */
+    public function setConfirme(?int $confirme): ?int {
+        $this->confirme = $confirme;
+        return $confirme;
     }
 }
