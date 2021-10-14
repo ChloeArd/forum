@@ -95,6 +95,12 @@ if (isset($_GET['success'])) {
                     </div>
                     <div class="width20 flexCenter">
                         <p><?=$subject->getDate()?></p>
+                        <?php
+                        if ($subject->getArchive() === 1 || $subject->getCategorieFk()->getArchive() === 1) { ?>
+                            <p class="red margL">(Archivé)</p>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </a>
                 <?php

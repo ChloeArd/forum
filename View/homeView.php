@@ -32,7 +32,7 @@ if (isset($_GET['success'])) {
 
 <div id='<?= $id?>' class='modal2 center colorWhite'><?= $return?><button id='closeModal' class='buttonClassic'><i class='fas fa-times'></i></button></div>
 <main>
-    <h1 class="center">Bienvenue sur le forum <span class="salmon">Salmon </span>!</h1>
+    <h1 class="center" id="title">Bienvenue sur le forum <span class="title">S</span><span class="title">a</span><span class="title">l</span><span class="title">m</span><span class="title">o</span><span class="title">n</span>!</h1>
     <div id="containerCategories" class="flexCenter flexRow wrap">
         <?php
         if (isset($var['categories'])) {
@@ -41,6 +41,12 @@ if (isset($_GET['success'])) {
                     <img class="imageHome" src="<?=$categorie->getPicture() ?>" alt="<?=$categorie->getTitle() ?>">
                     <p class="size20 center"><?=$categorie->getTitle() ?></p>
                     <p class="gray center"><?=$categorie->getDescription() ?></p>
+                    <?php
+                    if ($categorie->getArchive() === 1) { ?>
+                        <p class="red">(Archivé)</p>
+                        <?php
+                    }
+                    ?>
                 </a>
             <?php
             }
