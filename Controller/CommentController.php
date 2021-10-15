@@ -74,6 +74,40 @@ class CommentController {
     }
 
     /**
+     * report comment
+     * @param $comment
+     */
+    public function report($comment) {
+        if (isset($_SESSION["id"])) {
+            if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
+                $commentManager = new CommentManager();
+                $userManager = new UserManager();
+
+                $id = intval($comment['id']);
+                $id1 = $comment['subject_fk'];
+                $id2 = $comment['categorie_fk'];
+                $user_fk = intval($comment['user_fk']);
+
+                $user_fk = $userManager->getUser($user_fk);
+                if ($user_fk->getId()) {
+                    $comment = new Comment($id);
+                    $commentManager->report($comment);
+                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=5");
+                }
+            }
+            $this->return("Update/updateCommentReportView", "Forum : Signaler un commentaire");
+        }
+    }
+
+    /**
+     * display a report
+     */
+    public function reportAdmin() {
+        $manager = new CommentManager();
+        $this->return("reportView", "Forum : Sujets", ['comments' => $manager->getCommentReport()]);
+    }
+
+    /**
      * Archive a comment
      * @param $comment
      */

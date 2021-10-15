@@ -8,6 +8,14 @@
             <a href="../index.php?controller=user&action=sujects&id=<?=$_SESSION['id']?>">
                 <p class="border1">Mes sujets</p>
             </a>
+            <?php
+            if ($_SESSION['role_fk'] === "1") {?>
+                <a href="../index.php?controller=comments&action=reportAdmin&id=<?=$_SESSION['id']?>">
+                    <p class="border1">Les signalements</p>
+                </a>
+                <?php
+            }
+            ?>
             <div class="border1">
                 <form class="disconnection" method="post" action="../assets/php/disconnection.php">
                     <input type="submit" value="Me déconnecter">

@@ -310,8 +310,13 @@ h1 {
 .buttonPos3 {
     right: 15%;
 }
+
 .buttonPos4 {
     right: 13%;
+}
+
+.buttonPos5 {
+    right: 19%;
 }
 
 
@@ -344,6 +349,30 @@ h1 {
 
 .auto {
     margin: auto;
+}
+
+.buttonPos6 {
+    right: 27%;
+}
+
+.buttonPos7 {
+    right: 25%;
+}
+
+.buttonPos8 {
+    right: 23%;
+}
+
+.orange {
+    color: orange;
+}
+
+.borderOrange {
+    border: 5px solid orange;
+}
+
+.black {
+    color: black;
 }
 
 label {
@@ -382,6 +411,18 @@ textarea {
     }
     .buttonPos4 {
         right: 15%;
+    }
+
+    .buttonPos6 {
+        right: 30%;
+    }
+
+    .buttonPos7 {
+        right: 27%;
+    }
+
+    .buttonPos8 {
+        right: 25%;
     }
 }
 
@@ -442,6 +483,9 @@ textarea {
 @media screen and (max-width: 600px) {
     .imageCategorie {
         width: 90%;
+    }
+    .containerReport {
+        width: 100%;
     }
 }
 

@@ -49,7 +49,7 @@ class CommentManager {
     }
 
     /**
-     * Allows you to display a subject based on its ID.
+     * Allows you to display a comment based on its ID.
      * @param int $id
      * @return array
      */
@@ -79,6 +79,27 @@ class CommentManager {
         $comment = [];
         $request = DB::getInstance()->prepare("SELECT * FROM comment WHERE subject_fk = :subject_fk");
         $request->bindParam(":subject_fk", $subject_fk);
+        if($request->execute()) {
+            foreach ($request->fetchAll() as $info) {
+                $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
+                $subject = SubjectManager::getManager()->getSubject($info['subject_fk']);
+                $user = UserManager::getManager()->getUser($info['user_fk']);
+                if($user->getId()) {
+                    $comment[] = new Comment($info['id'], $info['date'], $info['comment'],$categorie, $subject, $user, $info['archive']);
+                }
+            }
+        }
+        return $comment;
+    }
+
+    /**
+     * Displays all comments that are flagged
+     * @return array
+     */
+    public function getCommentReport(): array {
+        $comment = [];
+        $request = DB::getInstance()->prepare("SELECT * FROM comment WHERE report = :report");
+        $request->bindValue(":report", 1);
         if($request->execute()) {
             foreach ($request->fetchAll() as $info) {
                 $categorie = CategorieManager::getManager()->getCategorie($info['categorie_fk']);
@@ -123,6 +144,20 @@ class CommentManager {
         $request->bindValue(':id', $comment->getId());
         $request->bindValue(':date', $comment->getDate());
         $request->bindValue(':comment', $comment->getComment());
+
+        return $request->execute();
+    }
+
+    /**
+     * report comment
+     * @param Comment $comment
+     * @return bool
+     */
+    public function report (Comment $comment): bool {
+        $request = DB::getInstance()->prepare("UPDATE comment SET report = :report WHERE id = :id");
+
+        $request->bindValue(':id', $comment->getId());
+        $request->bindValue(':report', 1);
 
         return $request->execute();
     }

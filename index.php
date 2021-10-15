@@ -88,6 +88,11 @@ if (isset($_GET['controller'])) {
                     case 'archive' :
                         $controllerComments->archive($_POST);
                         break;
+                    case 'report' :
+                        $controllerComments->report($_POST);
+                        break;
+                    case 'reportAdmin' :
+                        $controllerComments->reportAdmin($_POST);
                     case 'delete' :
                         $controllerComments->delete($_POST);
                         break;

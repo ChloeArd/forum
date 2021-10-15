@@ -20,6 +20,9 @@ if (isset($_GET['success'])) {
         case '4' :
             $return = "Un commentaire est bien archivé !";
             break;
+        case '5' :
+            $return = "Le commentaire a été signalé !";
+            break;
     }
 }
 ?>
@@ -104,6 +107,11 @@ if (isset($_GET['success'])) {
                             || $comment->getSubjectFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
                             || $comment->getArchive() === 1 && $_SESSION ['role_fk'] == "1") { ?>
                             <a href="../index.php?controller=comments&action=update&id=<?=$comment->getId()?>" class="button3"><i class="fas fa-edit"></i></a>
+
+                            <?php
+                        }
+                        if ($_SESSION['role_fk'] === "2") {?>
+                            <a href = "../index.php?controller=comments&action=report&id=<?=$comment->getId()?>" class="button3 buttonPos5" ><i class="fas fa-exclamation-triangle" ></i ></a >
                         <?php
                         }
                         // That the admin who can delete
