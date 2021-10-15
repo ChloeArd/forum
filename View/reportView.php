@@ -35,7 +35,12 @@
                         </div>
                         <?php
                     }
-                }?>
+                    if ($var['comments'] === []) { ?>
+                        <p>Pour l'instant, aucun commentaire n'a été signalé !</p>
+                <?php
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>

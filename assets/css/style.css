@@ -412,17 +412,14 @@ textarea {
     .buttonPos4 {
         right: 15%;
     }
-
     .buttonPos6 {
-        right: 30%;
+        right: 32%;
     }
-
     .buttonPos7 {
-        right: 27%;
+        right: 29%;
     }
-
     .buttonPos8 {
-        right: 25%;
+        right: 26%;
     }
 }
 
@@ -478,6 +475,15 @@ textarea {
     .buttonPos4 {
         right: 16%;
     }
+    .buttonPos6 {
+        right: 35%;
+    }
+    .buttonPos7 {
+        right: 30%;
+    }
+    .buttonPos8 {
+        right: 25%;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -496,10 +502,19 @@ textarea {
     .imageUpdate {
         width: 60%;
     }
-}
-
-@media screen and (max-width: 400px) {
     .comPseudo {
         font-size: 12px;
+    }
+    .buttonPos6, .buttonPos7, .buttonPos8 {
+        margin-bottom: 55px;
+    }
+    .buttonPos6 {
+        right: 45%;
+    }
+    .buttonPos7 {
+        right: 35%;
+    }
+    .buttonPos8 {
+        right: 25%;
     }
 }
