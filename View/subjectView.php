@@ -42,8 +42,9 @@ if (isset($_GET['success'])) {
             <p class="center gray">Par <?=$subject->getUserFk()->getPseudo()?></p>
             <?php
             if (isset($_SESSION['id'])) {
-
-                // Admin and moderator can edit and the user who created the topic too
+                // Check if it is an admin or a moderator and that it is not archived
+                // Check if this is the person who is connected and who wrote the subject matches and that the subject is not archived
+                // Check if it's archived and it's the admin
                 if ($_SESSION['role_fk'] !== "2" && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
                     || $subject->getUserFk()->getId() == $_SESSION['id'] && $subject->getCategorieFk()->getArchive() !== 1 && $subject->getArchive() !== 1
                     || $subject->getCategorieFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
@@ -100,7 +101,9 @@ if (isset($_GET['success'])) {
                     <p class="comPseudo"><?=$comment->getUserFk()->getPseudo()?> / <?=$comment->getDate()?></p>
                     <?php
                     if (isset($_SESSION['id'])) {
-                        // Admin and moderator can edit and the user who created the topic too
+                        // Check if it is an admin or a moderator and that it is not archived
+                        // Check if this is the person who is connected and who wrote the comment matches and that the comment is not archived
+                        // Check if it's archived and it's the admin
                         if ($_SESSION['role_fk'] !== "2" && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1 && $comment->getArchive() !== 1
                             || $comment->getUserFk()->getId() == $_SESSION['id'] && $comment->getCategorieFk()->getArchive() !== 1 && $comment->getSubjectFk()->getArchive() !== 1 && $comment->getArchive() !== 1
                             || $comment->getCategorieFk()->getArchive() === 1 && $_SESSION ['role_fk'] == "1"
