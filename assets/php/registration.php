@@ -1,6 +1,6 @@
 <?php
 
-use Forum\DB;
+use Chloe\Forum\Model\DB;
 require "../../Model/DB.php";
 
 if (isset($_POST["pseudo"], $_POST["email"], $_POST["password"], $_POST['passwordR'])) {

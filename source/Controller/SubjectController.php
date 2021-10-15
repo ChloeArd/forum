@@ -1,12 +1,12 @@
 <?php
-namespace Forum\Controller;
+namespace Chloe\Forum\Controller;
 
-use Forum\Controller\Traits\ReturnViewTrait;
-use Forum\Categorie\CategorieManager;
-use Forum\Comment\CommentManager;
-use Forum\Entity\Subject;
-use Forum\Subject\SubjectManager;
-use Forum\User\UserManager;
+use Chloe\Forum\Model\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Model\Manager\CategorieManager;
+use Chloe\Forum\Model\Manager\CommentManager;
+use Chloe\Forum\Model\Entity\Subject;
+use Chloe\Forum\Model\Manager\SubjectManager;
+use Chloe\Forum\Model\Manager\UserManager;
 
 class SubjectController {
 

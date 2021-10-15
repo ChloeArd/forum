@@ -1,5 +1,5 @@
 <?php
-use Forum\DB;
+use Chloe\Forum\Model\DB;
 
 require "../../Model/DB.php";
 

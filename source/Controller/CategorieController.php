@@ -1,11 +1,11 @@
 <?php
 
-namespace Forum\Controller;
+namespace Chloe\Forum\Controller;
 
-use Forum\Controller\Traits\ReturnViewTrait;
-use Forum\Categorie\CategorieManager;
-use Forum\Entity\Categorie;
-use Forum\User\UserManager;
+use Chloe\Forum\Model\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Model\Manager\CategorieManager;
+use Chloe\Forum\Model\Entity\Categorie;
+use Chloe\Forum\Model\Manager\UserManager;
 use phpDocumentor\Reflection\Types\Integer;
 
 class CategorieController {

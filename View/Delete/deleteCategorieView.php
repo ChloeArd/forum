@@ -1,6 +1,9 @@
 <?php
+
+use Chloe\Forum\Model\Manager\CategorieManager;
+
 $id = $_GET['id'];
-$manager = new \Forum\Categorie\CategorieManager();
+$manager = new CategorieManager();
 $categorie = $manager->getCategorieId($id);
 
 foreach ($categorie as $cat) { ?>

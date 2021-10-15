@@ -1,9 +1,9 @@
 <?php
 
-namespace Forum\Controller;
+namespace Chloe\Forum\Controller;
 
-use Forum\Controller\Traits\ReturnViewTrait;
-use Forum\Categorie\CategorieManager;
+use Chloe\Forum\Model\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Model\Manager\CategorieManager;
 
 class HomeController {
 

@@ -3,11 +3,13 @@ session_start();
 
 require 'vendor/autoload.php';
 
-use Forum\Controller\CategorieController;
-use Forum\Controller\CommentController;
-use Forum\Controller\HomeController;
-use Forum\Controller\SubjectController;
-use Forum\Controller\UserController;
+require_once 'source/Controller/Traits/ReturnViewTrait.php';
+
+use Chloe\Forum\Controller\CategorieController;
+use Chloe\Forum\Controller\CommentController;
+use Chloe\Forum\Controller\HomeController;
+use Chloe\Forum\Controller\SubjectController;
+use Chloe\Forum\Controller\UserController;
 
 if (isset($_GET['controller'])) {
     switch ($_GET['controller']) {

@@ -1,5 +1,5 @@
 <?php
-use Forum\DB;
+use Chloe\Forum\Model\DB;
 require_once "../../Model/DB.php";
 
 if (isset($_GET['pseudo'], $_GET['key'])) {

@@ -1,12 +1,12 @@
 <?php
-namespace Forum\Comment;
+namespace Chloe\Forum\Model\Manager;
 
-use Forum\DB;
-use Forum\Entity\Comment;
-use Forum\Categorie\CategorieManager;
-use Forum\User\UserManager;
-use Forum\Subject\SubjectManager;
-use Forum\Manager\Traits\ManagerTrait;
+use Chloe\Forum\Model\DB;
+use Chloe\Forum\Model\Entity\Comment;
+use Chloe\Forum\Model\Manager\CategorieManager;
+use Chloe\Forum\Model\Manager\UserManager;
+use Chloe\Forum\Model\Manager\SubjectManager;
+use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
 
 class CommentManager {
 
