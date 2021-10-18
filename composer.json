@@ -1,0 +1,19 @@
+{
+    "name": "chloe/forum",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Chloe\\Forum\\": "source/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ChloeArd",
+            "email": "chloe.ardoise@gmail.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "monolog/monolog": "^2.3"
+    }
+}

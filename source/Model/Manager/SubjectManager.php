@@ -6,6 +6,8 @@ use Chloe\Forum\Model\Entity\Subject;
 use Chloe\Forum\Model\Manager\UserManager;
 use Chloe\Forum\Model\Manager\CategorieManager;
 use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class SubjectManager {
 
@@ -170,6 +172,20 @@ class SubjectManager {
         $request->bindValue(':text', $subject->getText());
         $request->bindValue(':picture', $subject->getPicture());
 
+        // Create a log channel
+        $log = new Logger("updateSubject");
+        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateSubject.txt', Logger::INFO));
+
+        // add records
+        $log->info("Catégorie", ["id" => $subject->getId(),
+            "title" => $subject->getTitle(),
+            "description" => $subject->getDescription(),
+            "image" => $subject->getPicture(),
+            "text" => $subject->getText(),
+            "date" => $subject->getDate(),
+            "user_fk" => $subject->getUserFk()->getId(),
+            "utilisateur" => $subject->getUserFk()->getPseudo()]);
+
         return $request->execute();
     }
 
@@ -189,15 +205,30 @@ class SubjectManager {
 
     /**
      * Delete a subject with comments
-     * @param int $subject
+     * @param Subject $subject
      * @return bool
      */
-    public function delete (int $id): bool {
+    public function delete (Subject $subject): bool {
         $request = DB::getInstance()->prepare("DELETE FROM comment WHERE subject_fk = :subject_fk");
-        $request->bindValue(":subject_fk", $id);
+        $request->bindValue(":subject_fk", $subject->getId());
         $request->execute();
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE id = :id");
-        $request->bindValue(":id", $id);
+        $request->bindValue(":id", $subject->getId());
+
+        // Create a log channel
+        $log = new Logger("deleteSubject");
+        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteSubject.txt', Logger::INFO));
+
+        // add records
+        $log->info("Catégorie", ["id" => $subject->getId(),
+            "title" => $subject->getTitle(),
+            "description" => $subject->getDescription(),
+            "image" => $subject->getPicture(),
+            "text" => $subject->getText(),
+            "date" => $subject->getDate(),
+            "user_fk" => $subject->getUserFk()->getId(),
+            "utilisateur" => $subject->getUserFk()->getPseudo()]);
+
         return $request->execute();
     }
 }

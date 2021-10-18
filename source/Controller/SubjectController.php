@@ -165,12 +165,28 @@ class SubjectController {
      */
     public function delete($subject) {
         if (isset($_SESSION["id"])) {
-            if (isset($subject['id'], $subject['categorie_fk'])) {
+            if (isset($subject['id'], $subject['title'], $subject['description'], $subject['date'], $subject['text'], $subject['picture'], $subject['categorie_fk'], $subject['user_fk'])) {
                 $subjectManager = new SubjectManager();
-                $categrorie = intval($subject['categorie_fk']);
+                $categorieManager = new CategorieManager();
+                $userManager = new UserManager();
+
                 $id = intval($subject['id']);
-                $subjectManager->delete($id);
-                header("Location: ../index.php?controller=subjects&action=view&id=$categrorie&success=2");
+                $title = htmlentities(trim(ucfirst($subject['title'])));
+                $description = htmlentities(trim(ucfirst($subject['description'])));
+                $date = $subject['date'];
+                $text = htmlentities(trim(ucfirst($subject['text'])));
+                $picture = trim($subject['picture']);
+                $categorie_fk = intval($subject['categorie_fk']);
+                $id = $subject['categorie_fk'];
+                $user_fk = intval($subject['user_fk']);
+
+                $categorie_fk = $categorieManager->getCategorie($categorie_fk);
+                $user_fk = $userManager->getUser($user_fk);
+                if ($user_fk->getId()) {
+                    $subject = new Subject($id, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
+                    $subjectManager->delete($subject);
+                    header("Location: ../index.php?controller=subjects&action=view&id=$id&success=2");
+                }
             }
             $this->return('delete/deleteSubjectView', "Forum : Supprimer un sujet");
         }

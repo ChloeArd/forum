@@ -5,6 +5,8 @@ use Chloe\Forum\Model\DB;
 use Chloe\Forum\Model\Entity\Categorie;
 use Chloe\Forum\Model\Manager\UserManager;
 use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class CategorieManager {
 
@@ -109,6 +111,18 @@ class CategorieManager {
         $request->bindValue(':description', $categorie->setDescription($categorie->getDescription()));
         $request->bindValue(':picture', $categorie->setPicture($categorie->getPicture()));
 
+        // Create a log channel
+        $log = new Logger("updateCategorie");
+        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateCategorie.txt', Logger::INFO));
+
+        // add records
+        $log->info("Catégorie", ["id" => $categorie->getId(),
+                                        "title" => $categorie->getTitle(),
+                                        "description" => $categorie->getDescription(),
+                                        "image" => $categorie->getPicture(),
+                                        "user_fk" => $categorie->getUserFk()->getId(),
+                                        "utilisateur" => $categorie->getUserFk()->getPseudo()]);
+
         return $request->execute();
     }
 
@@ -128,18 +142,31 @@ class CategorieManager {
 
     /**
      * Delete a categorie with subject, comments
-     * @param int $id
+     * @param Categorie $categorie
      * @return bool
      */
-    public function delete (int $id): bool {
+    public function delete (Categorie $categorie): bool {
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE categorie_fk = :categorie_fk");
-        $request->bindValue(":categorie_fk", $id);
+        $request->bindValue(":categorie_fk", $categorie->getId());
         $request->execute();
         $request = DB::getInstance()->prepare("DELETE FROM comment WHERE categorie_fk = :categorie_fk");
-        $request->bindValue(":categorie_fk", $id);
+        $request->bindValue(":categorie_fk", $categorie->getId());
         $request->execute();
         $request = DB::getInstance()->prepare("DELETE FROM categorie WHERE id = :id");
-        $request->bindValue(":id", $id);
+        $request->bindValue(":id", $categorie->getId());
+
+        // Create a log channel
+        $log = new Logger("deleteCategorie");
+        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteCategorie.txt', Logger::INFO));
+
+        // add records to the updateCategorie
+        $log->info("Catégorie", ["id" => $categorie->getId(),
+            "title" => $categorie->getTitle(),
+            "description" => $categorie->getDescription(),
+            "image" => $categorie->getPicture(),
+            "user_fk" => $categorie->getUserFk()->getId(),
+            "utilisateur" => $categorie->getUserFk()->getPseudo()]);
+
         return $request->execute();
     }
 }

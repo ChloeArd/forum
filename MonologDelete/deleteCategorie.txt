@@ -1,0 +1,1 @@
+[2021-10-18T07:55:28.464688+00:00] deleteCategorie.INFO: Catégorie {"id":6,"title":"Chats","description":"Toutes les races de chats","image":"https://www.sciencesetavenir.fr/assets/img/2020/01/17/cover-r4x3w1000-5e21bf77a1547-chartreux-3298051-1920.jpg","user_fk":1,"utilisateur":"ChloeArd"} []
