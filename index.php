@@ -109,7 +109,7 @@ if (isset($_GET['controller'])) {
                     case 'delete' :
                         $controller->delete($_POST);
                         break;
-                    case 'sujects' :
+                    case 'subjects' :
                         $controller = new SubjectController();
                         $controller->subjectsByUser($_GET['id']);
                         break;

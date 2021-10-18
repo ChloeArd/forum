@@ -23,7 +23,7 @@ if (isset($_GET['success'])) {
             <a href="../index.php?controller=user&action=view&id=<?=$_SESSION['id']?>">
                 <p class="border1">Mes informations</p>
             </a>
-            <a href="../index.php?controller=user&action=sujects&id=<?=$_SESSION['id']?>">
+            <a href="../index.php?controller=user&action=subjects&id=<?=$_SESSION['id']?>">
                 <p class="border1">Mes sujets</p>
             </a>
             <?php
