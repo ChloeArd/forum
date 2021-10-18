@@ -37,7 +37,7 @@ class UserManager {
             $user->setRoleFk($role);
             $user->setConfirmkey($info['confirmkey']);
             $user->setConfirme($info['confirme']);
-            $user->setConfirme($info['premium']);
+            $user->setPremium($info['premium']);
         }
         return $user;
     }

@@ -41,7 +41,7 @@ if (isset($_GET['success'])) {
             <h1 class="center"><?=$subject->getTitle()?></h1>
             <p class="center gray">Par <?php
                 echo $subject->getUserFk()->getPseudo();
-                if ($_SESSION['premium'] === "1") {?>
+                if ($subject->getUserFk()->getPremium() == "1") {?>
                     <i class="fas fa-award salmon"></i>
                     <?php
                 }
@@ -107,10 +107,10 @@ if (isset($_GET['success'])) {
                     <p class="comPseudo">
                         <?php
                         echo $comment->getUserFk()->getPseudo();
-                    if ($_SESSION['premium'] === "1") {?>
-                        <i class="fas fa-award salmon"></i>
-                    <?php
-                    }
+                        if ($comment->getUserFk()->getPremium() == "1") {?>
+                            <i class="fas fa-award salmon"></i>
+                            <?php
+                        }
                     ?>
                         / <?=$comment->getDate()?></p>
                     <?php
