@@ -147,7 +147,7 @@ class CommentManager {
         $request->bindValue(':date', $comment->getDate());
         $request->bindValue(':comment', $comment->getComment());
 
-        if ($_SESSION['role_fk'] !== 2) {
+        if ($_SESSION['role_fk'] !== "2") {
             // Create a log channel
             $log = new Logger("updateComment");
             $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateComment.txt', Logger::INFO));
@@ -199,18 +199,17 @@ class CommentManager {
         $request = DB::getInstance()->prepare("DELETE FROM comment WHERE id = :id");
         $request->bindValue(":id", $comment->getId());
 
-        if ($_SESSION['role_fk'] !== 2) {
-            // Create a log channel
-            $log = new Logger("deleteComment");
-            $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteComment.txt', Logger::INFO));
+        // Create a log channel
+        $log = new Logger("deleteComment");
+        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteComment.txt', Logger::INFO));
 
-            // add records
-            $log->info("Comment", ["id" => $comment->getId(),
-                "comment" => $comment->getComment(),
-                "date" => $comment->getDate(),
-                "user_fk" => $comment->getUserFk()->getId(),
-                "utilisateur" => $comment->getUserFk()->getPseudo()]);
-        }
+        // add records
+        $log->info("Comment", ["id" => $comment->getId(),
+            "comment" => $comment->getComment(),
+            "date" => $comment->getDate(),
+            "user_fk" => $comment->getUserFk()->getId(),
+            "utilisateur" => $comment->getUserFk()->getPseudo()]);
+
         return $request->execute();
     }
 }

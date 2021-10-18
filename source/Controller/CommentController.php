@@ -54,17 +54,21 @@ class CommentController {
             if (isset($comment['id'], $comment['date'], $comment['comment'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
                 $commentManager = new CommentManager();
                 $userManager = new UserManager();
+                $subjectManager = new SubjectManager();
+                $categorieManager = new CategorieManager();
 
                 $id = intval($comment['id']);
                 $date = trim($comment['date']);
                 $comment1 = htmlentities(trim(ucfirst($comment['comment'])));
-                $id1 = $comment['subject_fk'];
-                $id2 = $comment['categorie_fk'];
+                $id1 = intval($comment['subject_fk']);
+                $id2 = intval($comment['categorie_fk']);
                 $user_fk = intval($comment['user_fk']);
 
                 $user_fk = $userManager->getUser($user_fk);
+                $subject_fk = $subjectManager->getSubject($id1);
+                $categorie_fk = $categorieManager->getCategorie($id2);
                 if ($user_fk->getId()) {
-                    $comment = new Comment($id, $date, $comment1);
+                    $comment = new Comment($id, $date, $comment1,$categorie_fk, $subject_fk, $user_fk);
                     $commentManager->update($comment);
                     header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=1");
                 }
