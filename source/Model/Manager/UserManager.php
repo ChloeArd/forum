@@ -3,7 +3,6 @@ namespace Chloe\Forum\Model\Manager;
 
 use Chloe\Forum\Model\DB;
 use Chloe\Forum\Model\Entity\User;
-use Chloe\Forum\Model\Manager\RoleManager;
 use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
 
 class UserManager {

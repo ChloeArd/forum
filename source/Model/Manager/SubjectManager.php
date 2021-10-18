@@ -3,8 +3,6 @@ namespace Chloe\Forum\Model\Manager;
 
 use Chloe\Forum\Model\DB;
 use Chloe\Forum\Model\Entity\Subject;
-use Chloe\Forum\Model\Manager\UserManager;
-use Chloe\Forum\Model\Manager\CategorieManager;
 use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;

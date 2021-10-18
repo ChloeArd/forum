@@ -3,9 +3,6 @@ namespace Chloe\Forum\Model\Manager;
 
 use Chloe\Forum\Model\DB;
 use Chloe\Forum\Model\Entity\Comment;
-use Chloe\Forum\Model\Manager\CategorieManager;
-use Chloe\Forum\Model\Manager\UserManager;
-use Chloe\Forum\Model\Manager\SubjectManager;
 use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -141,11 +138,12 @@ class CommentManager {
      * @return bool
      */
     public function update (Comment $comment): bool {
-        $request = DB::getInstance()->prepare("UPDATE comment SET date = :date, comment = :comment WHERE id = :id");
+        $request = DB::getInstance()->prepare("UPDATE comment SET date = :date, comment = :comment, report = :report WHERE id = :id");
 
         $request->bindValue(':id', $comment->getId());
         $request->bindValue(':date', $comment->getDate());
         $request->bindValue(':comment', $comment->getComment());
+        $request->bindValue(':report', 0);
 
         if ($_SESSION['role_fk'] !== "2") {
             // Create a log channel
