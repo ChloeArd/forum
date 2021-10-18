@@ -1,0 +1,2 @@
+[2021-10-18T08:51:04.066969+00:00] deleteComment.INFO: Comment {"id":14,"comment":"Rtgtgrgtr","date":"2021-10-18","user_fk":1,"utilisateur":"ChloeArd"} []
+[2021-10-18T08:51:35.089850+00:00] deleteComment.INFO: Comment {"id":15,"comment":"B","date":"2021-10-18","user_fk":1,"utilisateur":"ChloeArd"} []

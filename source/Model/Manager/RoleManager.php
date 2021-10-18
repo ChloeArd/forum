@@ -1,11 +1,11 @@
 <?php
-namespace Forum\Role;
+namespace Chloe\Forum\Model\Manager;
 
-use Forum\DB;
-use Forum\Entity\Role;
-use Forum\Manager\Traits\ManagerTrait;
+use Chloe\Forum\Model\DB;
+use Chloe\Forum\Model\Entity\Role;
+use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
 
-require_once "Model/Manager/Traits/ManagerTrait.php";
+require_once "Traits/ManagerTrait.php";
 
 class RoleManager {
 

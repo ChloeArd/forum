@@ -1,6 +1,9 @@
 <?php
+
+use Chloe\Forum\Model\Manager\CommentManager;
+
 $id = $_GET['id'];
-$manager = new \Forum\Comment\CommentManager();
+$manager = new CommentManager();
 $comment = $manager->getCommentId($id);
 
 foreach ($comment as $com) { ?>
@@ -9,7 +12,6 @@ foreach ($comment as $com) { ?>
         <form method="post" action="" class="flexColumn flexCenter auto">
             <label for="comment">Commentaire</label>
             <textarea name="comment" id="comment" required><?=$com->getComment()?></textarea>
-            <input type="hidden" value="id" name="id">
             <input type="hidden" value="<?=date("Y-m-d")?>" name="date">
             <input type="hidden" value="<?=$com->getId()?>" name="id">
             <input type="hidden" value="<?=$com->getCategorieFk()->getId()?>" name="categorie_fk">

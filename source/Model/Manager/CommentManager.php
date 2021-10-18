@@ -1,12 +1,14 @@
 <?php
-namespace Forum\Comment;
+namespace Chloe\Forum\Model\Manager;
 
-use Forum\DB;
-use Forum\Entity\Comment;
-use Forum\Categorie\CategorieManager;
-use Forum\User\UserManager;
-use Forum\Subject\SubjectManager;
-use Forum\Manager\Traits\ManagerTrait;
+use Chloe\Forum\Model\DB;
+use Chloe\Forum\Model\Entity\Comment;
+use Chloe\Forum\Model\Manager\CategorieManager;
+use Chloe\Forum\Model\Manager\UserManager;
+use Chloe\Forum\Model\Manager\SubjectManager;
+use Chloe\Forum\Model\Manager\Traits\ManagerTrait;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class CommentManager {
 
@@ -145,6 +147,18 @@ class CommentManager {
         $request->bindValue(':date', $comment->getDate());
         $request->bindValue(':comment', $comment->getComment());
 
+        if ($_SESSION['role_fk'] !== "2") {
+            // Create a log channel
+            $log = new Logger("updateComment");
+            $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateComment.txt', Logger::INFO));
+
+            // add records
+            $log->info("Comment", ["id" => $comment->getId(),
+                "comment" => $comment->getComment(),
+                "date" => $comment->getDate(),
+                "user_fk" => $comment->getUserFk()->getId(),
+                "utilisateur" => $comment->getUserFk()->getPseudo()]);
+        }
         return $request->execute();
     }
 
@@ -178,12 +192,24 @@ class CommentManager {
 
     /**
      * Delete a comment
-     * @param int $id
+     * @param Comment $comment
      * @return bool
      */
-    public function delete (int $id): bool {
+    public function delete (Comment $comment): bool {
         $request = DB::getInstance()->prepare("DELETE FROM comment WHERE id = :id");
-        $request->bindValue(":id", $id);
+        $request->bindValue(":id", $comment->getId());
+
+        // Create a log channel
+        $log = new Logger("deleteComment");
+        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteComment.txt', Logger::INFO));
+
+        // add records
+        $log->info("Comment", ["id" => $comment->getId(),
+            "comment" => $comment->getComment(),
+            "date" => $comment->getDate(),
+            "user_fk" => $comment->getUserFk()->getId(),
+            "utilisateur" => $comment->getUserFk()->getPseudo()]);
+
         return $request->execute();
     }
 }

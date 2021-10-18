@@ -1,6 +1,9 @@
 <?php
+
+use Chloe\Forum\Model\Manager\CategorieManager;
+
 $id = $_GET['id'];
-$manager = new \Forum\Categorie\CategorieManager();
+$manager = new CategorieManager();
 $categorie = $manager->getCategorieId($id);
 
 foreach ($categorie as $cat) { ?>
@@ -10,6 +13,10 @@ foreach ($categorie as $cat) { ?>
         <p class="gray center margTop15">Si oui, tous les sujets et commentaires seront définitivement supprimés !</p>
         <form method="post" action="" class="flexColumn flexCenter auto">
             <input type="hidden" value="<?=$cat->getId()?>" name="id">
+            <input type="hidden" value="<?=$cat->getTitle()?>" name="title">
+            <input type="hidden" value="<?=$cat->getDescription()?>" name="description">
+            <input type="hidden" value="<?=$cat->getPicture()?>" name="picture">
+            <input type="hidden" value="<?=$cat->getUserFk()->getId()?>" name="user_fk">
             <input type="submit" name="submit" value="Oui" class="button margTop15">
             <a href="../../index.php?controller=subjects&action=view&id=<?=$id?>" class="button2">Non</a>
         </form>

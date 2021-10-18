@@ -1,4 +1,7 @@
 <?php
+
+use Chloe\Forum\Model\Manager\SubjectManager;
+
 $return = "";
 $id = "";
 
@@ -16,7 +19,7 @@ if (isset($_GET['error'])) {
 
 $id = $_GET['id'];
 $categorie_fk = $_GET['id2'];
-$manager = new \Forum\Subject\SubjectManager();
+$manager = new SubjectManager();
 $subject = $manager->getSubjectId($id, $categorie_fk);
 
 foreach ($subject as $sub) { ?>

@@ -1,11 +1,11 @@
 <?php
 
-namespace Forum\Controller;
+namespace Chloe\Forum\Controller;
 
-use Forum\Controller\Traits\ReturnViewTrait;
-use Forum\Categorie\CategorieManager;
-use Forum\Entity\Categorie;
-use Forum\User\UserManager;
+use Chloe\Forum\Model\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Model\Manager\CategorieManager;
+use Chloe\Forum\Model\Entity\Categorie;
+use Chloe\Forum\Model\Manager\UserManager;
 use phpDocumentor\Reflection\Types\Integer;
 
 class CategorieController {
@@ -121,11 +121,22 @@ class CategorieController {
     public function delete($categorie) {
         if (isset($_SESSION["id"])) {
             if ($_SESSION['role_fk'] === "1") {
-                if (isset($categorie['id'])) {
+                if (isset($categorie['id'], $categorie['title'], $categorie['description'], $categorie['picture'], $categorie['user_fk'])) {
+                    $userManager = new UserManager();
                     $categorieManager = new CategorieManager();
+
                     $id = intval($categorie['id']);
-                    $categorieManager->delete($id);
-                    header("Location: ../index.php?&success=4");
+                    $title = htmlentities(trim(ucfirst($categorie['title'])));
+                    $description = htmlentities(trim(ucfirst($categorie['description'])));
+                    $picture = trim($categorie['picture']);
+                    $user_fk = intval($categorie['user_fk']);
+
+                    $user_fk = $userManager->getUser($user_fk);
+                    if ($user_fk->getId()) {
+                        $categorie = new Categorie($id, $title, $description, $picture, $user_fk);
+                        $categorieManager->delete($categorie);
+                        header("Location: ../index.php?&success=4");
+                    }
                 }
                 $this->return('delete/deleteCategorieView', "Forum : Supprimer une catégorie");
             }

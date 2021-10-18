@@ -1,4 +1,7 @@
 <?php
+
+use Chloe\Forum\Model\Manager\CategorieManager;
+
 $return = "";
 $id2 = "";
 
@@ -18,7 +21,7 @@ if (isset($_GET['error'])) {
 }
 
 $id = $_GET['id'];
-$manager = new \Forum\Categorie\CategorieManager();
+$manager = new CategorieManager();
 $categorie = $manager->getCategorieId($id);
 
 foreach ($categorie as $cat) { ?>

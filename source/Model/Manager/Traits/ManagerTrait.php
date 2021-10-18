@@ -1,6 +1,6 @@
 <?php
 
-namespace Forum\Manager\Traits;
+namespace Chloe\Forum\Model\Manager\Traits;
 
 trait ManagerTrait {
 

@@ -1,6 +1,6 @@
 <?php
-use Forum\DB;
-require_once "../../Model/DB.php";
+use Chloe\Forum\Model\DB;
+require_once "../../source/Model/DB.php";
 
 if (isset($_GET['pseudo'], $_GET['key'])) {
     $bdd = DB::getInstance();

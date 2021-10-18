@@ -1,9 +1,9 @@
 <?php
-namespace Forum\Controller;
+namespace Chloe\Forum\Controller;
 
-use Forum\Controller\Traits\ReturnViewTrait;
-use Forum\User\UserManager;
-use Forum\Entity\User;
+use Chloe\Forum\Model\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Model\Manager\UserManager;
+use Chloe\Forum\Model\Entity\User;
 
 class UserController {
 

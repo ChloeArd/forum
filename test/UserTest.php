@@ -1,8 +1,8 @@
 <?php
 namespace test\UserManager;
 
-use Forum\Entity\Role;
-use Forum\Entity\User;
+use Chloe\Forum\Model\Entity\Role;
+use Chloe\Forum\Model\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 require_once "../Model/Entity/User.php";

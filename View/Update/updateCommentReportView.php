@@ -1,6 +1,9 @@
 <?php
+
+use Chloe\Forum\Model\Manager\CommentManager;
+
 $id = $_GET['id'];
-$manager = new \Forum\Comment\CommentManager();
+$manager = new CommentManager();
 $comment = $manager->getCommentId($id);
 
 foreach ($comment as $com) { ?>

@@ -1,12 +1,12 @@
 <?php
-namespace Forum\Controller;
+namespace Chloe\Forum\Controller;
 
-use Forum\Controller\Traits\ReturnViewTrait;
-use Forum\Comment\CommentManager;
-use Forum\Entity\Comment;
-use Forum\Categorie\CategorieManager;
-use Forum\Subject\SubjectManager;
-use Forum\User\UserManager;
+use Chloe\Forum\Model\Controller\Traits\ReturnViewTrait;
+use Chloe\Forum\Model\Manager\CommentManager;
+use Chloe\Forum\Model\Entity\Comment;
+use Chloe\Forum\Model\Manager\CategorieManager;
+use Chloe\Forum\Model\Manager\SubjectManager;
+use Chloe\Forum\Model\Manager\UserManager;
 
 class CommentController {
 
@@ -54,17 +54,21 @@ class CommentController {
             if (isset($comment['id'], $comment['date'], $comment['comment'], $comment['categorie_fk'], $comment['subject_fk'], $comment['user_fk'])) {
                 $commentManager = new CommentManager();
                 $userManager = new UserManager();
+                $subjectManager = new SubjectManager();
+                $categorieManager = new CategorieManager();
 
                 $id = intval($comment['id']);
                 $date = trim($comment['date']);
                 $comment1 = htmlentities(trim(ucfirst($comment['comment'])));
-                $id1 = $comment['subject_fk'];
-                $id2 = $comment['categorie_fk'];
+                $id1 = intval($comment['subject_fk']);
+                $id2 = intval($comment['categorie_fk']);
                 $user_fk = intval($comment['user_fk']);
 
                 $user_fk = $userManager->getUser($user_fk);
+                $subject_fk = $subjectManager->getSubject($id1);
+                $categorie_fk = $categorieManager->getCategorie($id2);
                 if ($user_fk->getId()) {
-                    $comment = new Comment($id, $date, $comment1);
+                    $comment = new Comment($id, $date, $comment1,$categorie_fk, $subject_fk, $user_fk);
                     $commentManager->update($comment);
                     header("Location: ../index.php?controller=subjects&action=viewOnly&id=$id1&id2=$id2&success=1");
                 }
@@ -148,13 +152,27 @@ class CommentController {
      */
     public function delete($comment) {
         if (isset($_SESSION["id"])) {
-            if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'])) {
+            if (isset($comment['id'], $comment['comment'], $comment['date'], $comment['user_fk'], $comment['categorie_fk'], $comment['subject_fk'])) {
                 $commentManager = new CommentManager();
+                $userManager = new UserManager();
+                $categorieManager = new CategorieManager();
+                $subjectManager = new SubjectManager();
+
                 $id = intval($comment['id']);
-                $categorie = $comment['categorie_fk'];
-                $subject = $comment['subject_fk'];
-                $commentManager->delete($id);
-                header("Location: ../index.php?controller=subjects&action=viewOnly&id=$subject&id2=$categorie&success=2");
+                $commentUser = htmlentities($comment['comment']);
+                $date = htmlentities($comment['date']);
+                $user_fk = intval($comment['user_fk']);
+                $categorie = intval($comment['categorie_fk']);
+                $subject = intval($comment['subject_fk']);
+
+                $user_fk = $userManager->getUser($user_fk);
+                $categorie_fk = $categorieManager->getCategorie($categorie);
+                $subject_fk = $subjectManager->getSubject($subject);
+                if ($user_fk->getId()) {
+                    $comment = new Comment($id, $date, $commentUser, $categorie_fk, $subject_fk, $user_fk);
+                    $commentManager->delete($comment);
+                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$subject&id2=$categorie&success=2");
+                }
             }
             $this->return('delete/deleteCommentView', "Forum : Supprimer un commentaire");
         }
