@@ -13,6 +13,9 @@ foreach ($comment as $com) { ?>
     <p class="gray center margTop15">Si oui, le commentaire sera définitivement supprimé !</p>
     <form method="post" action="" class="flexColumn flexCenter auto">
         <input type="hidden" value="<?=$com->getId()?>" name="id">
+        <input type="hidden" value="<?=$com->getComment()?>" name="comment">
+        <input type="hidden" value="<?=$com->getDate()?>" name="date">
+        <input type="hidden" value="<?=$com->getUserFk()->getId()?>" name="user_fk">
         <input type="hidden" value="<?=$com->getCategorieFk()->getId()?>" name="categorie_fk">
         <input type="hidden" value="<?=$com->getSubjectFk()->getId()?>" name="subject_fk">
         <input type="submit" name="submit" value="Oui" class="button margTop15">

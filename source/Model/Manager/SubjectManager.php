@@ -172,20 +172,21 @@ class SubjectManager {
         $request->bindValue(':text', $subject->getText());
         $request->bindValue(':picture', $subject->getPicture());
 
-        // Create a log channel
-        $log = new Logger("updateSubject");
-        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateSubject.txt', Logger::INFO));
+        if ($_SESSION['role_fk'] !== 2) {
+            // Create a log channel
+            $log = new Logger("updateSubject");
+            $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateSubject.txt', Logger::INFO));
 
-        // add records
-        $log->info("Catégorie", ["id" => $subject->getId(),
-            "title" => $subject->getTitle(),
-            "description" => $subject->getDescription(),
-            "image" => $subject->getPicture(),
-            "text" => $subject->getText(),
-            "date" => $subject->getDate(),
-            "user_fk" => $subject->getUserFk()->getId(),
-            "utilisateur" => $subject->getUserFk()->getPseudo()]);
-
+            // add records
+            $log->info("Subject", ["id" => $subject->getId(),
+                "title" => $subject->getTitle(),
+                "description" => $subject->getDescription(),
+                "image" => $subject->getPicture(),
+                "text" => $subject->getText(),
+                "date" => $subject->getDate(),
+                "user_fk" => $subject->getUserFk()->getId(),
+                "utilisateur" => $subject->getUserFk()->getPseudo()]);
+        }
         return $request->execute();
     }
 
@@ -215,19 +216,21 @@ class SubjectManager {
         $request = DB::getInstance()->prepare("DELETE FROM subject WHERE id = :id");
         $request->bindValue(":id", $subject->getId());
 
-        // Create a log channel
-        $log = new Logger("deleteSubject");
-        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteSubject.txt', Logger::INFO));
+        if ($_SESSION['role_fk'] !== 2) {
+            // Create a log channel
+            $log = new Logger("deleteSubject");
+            $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteSubject.txt', Logger::INFO));
 
-        // add records
-        $log->info("Catégorie", ["id" => $subject->getId(),
-            "title" => $subject->getTitle(),
-            "description" => $subject->getDescription(),
-            "image" => $subject->getPicture(),
-            "text" => $subject->getText(),
-            "date" => $subject->getDate(),
-            "user_fk" => $subject->getUserFk()->getId(),
-            "utilisateur" => $subject->getUserFk()->getPseudo()]);
+            // add records
+            $log->info("Subject", ["id" => $subject->getId(),
+                "title" => $subject->getTitle(),
+                "description" => $subject->getDescription(),
+                "image" => $subject->getPicture(),
+                "text" => $subject->getText(),
+                "date" => $subject->getDate(),
+                "user_fk" => $subject->getUserFk()->getId(),
+                "utilisateur" => $subject->getUserFk()->getPseudo()]);
+        }
 
         return $request->execute();
     }

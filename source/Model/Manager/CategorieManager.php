@@ -111,18 +111,20 @@ class CategorieManager {
         $request->bindValue(':description', $categorie->setDescription($categorie->getDescription()));
         $request->bindValue(':picture', $categorie->setPicture($categorie->getPicture()));
 
-        // Create a log channel
-        $log = new Logger("updateCategorie");
-        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateCategorie.txt', Logger::INFO));
 
-        // add records
-        $log->info("Catégorie", ["id" => $categorie->getId(),
-                                        "title" => $categorie->getTitle(),
-                                        "description" => $categorie->getDescription(),
-                                        "image" => $categorie->getPicture(),
-                                        "user_fk" => $categorie->getUserFk()->getId(),
-                                        "utilisateur" => $categorie->getUserFk()->getPseudo()]);
+        if ($_SESSION['role_fk'] !== 2) {
+            // Create a log channel
+            $log = new Logger("updateCategorie");
+            $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologUpdate/updateCategorie.txt', Logger::INFO));
 
+            // add records
+            $log->info("Categorie", ["id" => $categorie->getId(),
+                "title" => $categorie->getTitle(),
+                "description" => $categorie->getDescription(),
+                "image" => $categorie->getPicture(),
+                "user_fk" => $categorie->getUserFk()->getId(),
+                "utilisateur" => $categorie->getUserFk()->getPseudo()]);
+        }
         return $request->execute();
     }
 
@@ -155,18 +157,19 @@ class CategorieManager {
         $request = DB::getInstance()->prepare("DELETE FROM categorie WHERE id = :id");
         $request->bindValue(":id", $categorie->getId());
 
-        // Create a log channel
-        $log = new Logger("deleteCategorie");
-        $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteCategorie.txt', Logger::INFO));
+        if ($_SESSION['role_fk'] !== 2) {
+            // Create a log channel
+            $log = new Logger("deleteCategorie");
+            $log->pushHandler(new StreamHandler(dirname(__FILE__) . '../../../../MonologDelete/deleteCategorie.txt', Logger::INFO));
 
-        // add records to the updateCategorie
-        $log->info("Catégorie", ["id" => $categorie->getId(),
-            "title" => $categorie->getTitle(),
-            "description" => $categorie->getDescription(),
-            "image" => $categorie->getPicture(),
-            "user_fk" => $categorie->getUserFk()->getId(),
-            "utilisateur" => $categorie->getUserFk()->getPseudo()]);
-
+            // add records to the updateCategorie
+            $log->info("Categorie", ["id" => $categorie->getId(),
+                "title" => $categorie->getTitle(),
+                "description" => $categorie->getDescription(),
+                "image" => $categorie->getPicture(),
+                "user_fk" => $categorie->getUserFk()->getId(),
+                "utilisateur" => $categorie->getUserFk()->getPseudo()]);
+        }
         return $request->execute();
     }
 }

@@ -11,9 +11,6 @@ use Chloe\Forum\Controller\HomeController;
 use Chloe\Forum\Controller\SubjectController;
 use Chloe\Forum\Controller\UserController;
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-
 if (isset($_GET['controller'])) {
     switch ($_GET['controller']) {
         case 'categories' :

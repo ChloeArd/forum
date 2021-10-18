@@ -177,7 +177,7 @@ class SubjectController {
                 $text = htmlentities(trim(ucfirst($subject['text'])));
                 $picture = trim($subject['picture']);
                 $categorie_fk = intval($subject['categorie_fk']);
-                $id = $subject['categorie_fk'];
+                $id2 = $subject['categorie_fk'];
                 $user_fk = intval($subject['user_fk']);
 
                 $categorie_fk = $categorieManager->getCategorie($categorie_fk);
@@ -185,7 +185,7 @@ class SubjectController {
                 if ($user_fk->getId()) {
                     $subject = new Subject($id, $title, $description, $date, $text, $picture, $categorie_fk, $user_fk);
                     $subjectManager->delete($subject);
-                    header("Location: ../index.php?controller=subjects&action=view&id=$id&success=2");
+                    header("Location: ../index.php?controller=subjects&action=view&id=$id2&success=2");
                 }
             }
             $this->return('delete/deleteSubjectView', "Forum : Supprimer un sujet");

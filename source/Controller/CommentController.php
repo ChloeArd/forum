@@ -148,13 +148,27 @@ class CommentController {
      */
     public function delete($comment) {
         if (isset($_SESSION["id"])) {
-            if (isset($comment['id'], $comment['categorie_fk'], $comment['subject_fk'])) {
+            if (isset($comment['id'], $comment['comment'], $comment['date'], $comment['user_fk'], $comment['categorie_fk'], $comment['subject_fk'])) {
                 $commentManager = new CommentManager();
+                $userManager = new UserManager();
+                $categorieManager = new CategorieManager();
+                $subjectManager = new SubjectManager();
+
                 $id = intval($comment['id']);
-                $categorie = $comment['categorie_fk'];
-                $subject = $comment['subject_fk'];
-                $commentManager->delete($id);
-                header("Location: ../index.php?controller=subjects&action=viewOnly&id=$subject&id2=$categorie&success=2");
+                $commentUser = htmlentities($comment['comment']);
+                $date = htmlentities($comment['date']);
+                $user_fk = intval($comment['user_fk']);
+                $categorie = intval($comment['categorie_fk']);
+                $subject = intval($comment['subject_fk']);
+
+                $user_fk = $userManager->getUser($user_fk);
+                $categorie_fk = $categorieManager->getCategorie($categorie);
+                $subject_fk = $subjectManager->getSubject($subject);
+                if ($user_fk->getId()) {
+                    $comment = new Comment($id, $date, $commentUser, $categorie_fk, $subject_fk, $user_fk);
+                    $commentManager->delete($comment);
+                    header("Location: ../index.php?controller=subjects&action=viewOnly&id=$subject&id2=$categorie&success=2");
+                }
             }
             $this->return('delete/deleteCommentView', "Forum : Supprimer un commentaire");
         }
