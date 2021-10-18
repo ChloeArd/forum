@@ -91,6 +91,9 @@ if (isset($_GET['controller'])) {
                     case 'registration' :
                         $controller->registration();
                         break;
+                    case 'premium' :
+                        $controller->premium();
+                        break;
                 }
             }
         case 'user' :

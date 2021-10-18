@@ -26,6 +26,7 @@ if (isset($_POST["pseudo"], $_POST["password"])) {
             $_SESSION['email'] = $user['email'];
             $_SESSION['password'] = $password;
             $_SESSION['role_fk'] = $user['role_fk'];
+            $_SESSION['premium'] = $user['premium'];
             $id = $_SESSION['id'];
 
             header("Location: ../../index.php?success=0&id=$id");

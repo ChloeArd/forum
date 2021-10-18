@@ -11,6 +11,7 @@ class User {
     private ?Role $role_fk;
     private ?string $confirmkey;
     private ?int $confirme;
+    private ?int $premium;
 
     /**
      * @param int|null $id
@@ -18,9 +19,12 @@ class User {
      * @param string|null $email
      * @param string|null $password
      * @param Role|null $role_fk
+     * @param string|null $confirmkey
+     * @param int|null $confirme
+     * @param int|null $premium
      */
     public function __construct(?int $id = null, ?string $pseudo = null, ?string $email = null, ?string $password = null,
-                                ?Role $role_fk = null, ?string $confirmkey = null, ?int $confirme = null) {
+                                ?Role $role_fk = null, ?string $confirmkey = null, ?int $confirme = null, ?int $premium = null) {
         $this->id = $id;
         $this->pseudo = $pseudo;
         $this->email = $email;
@@ -28,6 +32,7 @@ class User {
         $this->role_fk = $role_fk;
         $this->confirmkey = $confirmkey;
         $this->confirme = $confirme;
+        $this->premium = $premium;
     }
 
     /**
@@ -133,5 +138,20 @@ class User {
     public function setConfirme(?int $confirme): ?int {
         $this->confirme = $confirme;
         return $confirme;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPremium(): ?int {
+        return $this->premium;
+    }
+
+    /**
+     * @param int|null $premium
+     */
+    public function setPremium(?int $premium): ?int {
+        $this->premium = $premium;
+        return $premium;
     }
 }

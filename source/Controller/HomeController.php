@@ -32,4 +32,11 @@ class HomeController {
     public function registration() {
         $this->return("registrationView", "Forum : Inscription");
     }
+
+    /**
+     * display the premium page
+     */
+    public function premium() {
+        $this->return("memberPremiumView", "Forum : Devenir premium");
+    }
 }

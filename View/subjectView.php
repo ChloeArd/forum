@@ -39,7 +39,13 @@ if (isset($_GET['success'])) {
             }
             ?>
             <h1 class="center"><?=$subject->getTitle()?></h1>
-            <p class="center gray">Par <?=$subject->getUserFk()->getPseudo()?></p>
+            <p class="center gray">Par <?php
+                echo $subject->getUserFk()->getPseudo();
+                if ($_SESSION['premium'] === "1") {?>
+                    <i class="fas fa-award salmon"></i>
+                    <?php
+                }
+                ?></p>
             <?php
             if (isset($_SESSION['id'])) {
                 // Check if it is an admin or a moderator and that it is not archived
@@ -98,7 +104,15 @@ if (isset($_GET['success'])) {
         foreach ($var['comments'] as $comment) { ?>
             <div class="comments flexColumn">
                 <div class="pseudo gray flexRow align">
-                    <p class="comPseudo"><?=$comment->getUserFk()->getPseudo()?> / <?=$comment->getDate()?></p>
+                    <p class="comPseudo">
+                        <?php
+                        echo $comment->getUserFk()->getPseudo();
+                    if ($_SESSION['premium'] === "1") {?>
+                        <i class="fas fa-award salmon"></i>
+                    <?php
+                    }
+                    ?>
+                        / <?=$comment->getDate()?></p>
                     <?php
                     if (isset($_SESSION['id'])) {
                         // Check if it is an admin or a moderator and that it is not archived

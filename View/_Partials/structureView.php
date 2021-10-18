@@ -17,6 +17,11 @@
             if (isset($_SESSION['id'])) {?>
                 <a href="../../index.php?controller=user&action=view&id=<?=$_SESSION['id']?>"><i class="fas fa-user-circle margR"></i><?=$_SESSION['pseudo'] ?></a>
                 <?php
+                if ($_SESSION['premium'] === "0" && $_SESSION['role_fk'] === "2"){
+                    ?>
+                    <a href="../../index.php?controller=home&page=premium">Devenir Premium <i class="fas fa-award"></i></a>
+                    <?php
+                }
             }
             else { ?>
                 <a href="../../index.php?controller=home&page=connection">Connexion</a>
