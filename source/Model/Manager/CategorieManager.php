@@ -34,7 +34,7 @@ class CategorieManager {
             $categorie->setTitle($data['title']);
             $categorie->setDescription($data['description']);
             $categorie->setPicture($data['picture']);
-            $user = $this->userManager->getUser(['user_fk']);
+            $user = $this->userManager->getUser($data['user_fk']);
             $categorie->setUserFk($user);
             $categorie->setArchive($data['archive']);
         }

@@ -36,11 +36,11 @@ class CommentManager {
             $comment->setId($data['id']);
             $comment->setDate($data['date']);
             $comment->setComment($data['comment']);
-            $categorie = $this->categorieManager->getCategorie(['categorie_fk']);
+            $categorie = $this->categorieManager->getCategorie($data['categorie_fk']);
             $comment->setCategorieFk($categorie);
-            $subject = $this->subjectManager->getSubject(['subject_fk']);
+            $subject = $this->subjectManager->getSubject($data['subject_fk']);
             $comment->setSubjectFk($subject);
-            $user = $this->userManager->getUser(['user_fk']);
+            $user = $this->userManager->getUser($data['user_fk']);
             $comment->setUserFk($user);
             $comment->setArchive($data['archive']);
         }

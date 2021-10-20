@@ -37,9 +37,9 @@ class SubjectManager {
             $subject->setDate($data['date']);
             $subject->setText($data['text']);
             $subject->setPicture($data['picture']);
-            $categorie = $this->categorieManager->getCategorie(['categorie_fk']);
+            $categorie = $this->categorieManager->getCategorie($data['categorie_fk']);
             $subject->setCategorieFk($categorie);
-            $user = $this->userManager->getUser(['user_fk']);
+            $user = $this->userManager->getUser($data['user_fk']);
             $subject->setUserFk($user);
             $subject->setArchive($data['archive']);
         }
